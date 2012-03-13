@@ -1,4 +1,8 @@
 PrepareLessons::Application.routes.draw do
+  resources :lesson_hours
+
+  resources :lessons
+
   resources :homes
 
   # The priority is based upon order of creation:

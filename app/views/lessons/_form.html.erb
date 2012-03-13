@@ -1,0 +1,20 @@
+<%= simple_nested_form_for(@lesson) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+  </div>
+
+  <%= f.fields_for :lesson_hours do |lesson_hour_form| %>
+	  <%= lesson_hour_form.text_field :name %>
+	  <%= lesson_hour_form.link_to_remove "Remove this lesson_hour" %>
+	<% end %>
+	<p><%= f.link_to_add "Add a lesson_hour", :lesson_hours %></p>
+
+
+	
+	<div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
