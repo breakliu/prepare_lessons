@@ -1,4 +1,5 @@
 jQuery(function($) {
+	var total_lesson_hours = 0;
   window.NestedFormEvents = function() {
     this.addFields = $.proxy(this.addFields, this);
     this.removeFields = $.proxy(this.removeFields, this);
@@ -48,7 +49,10 @@ jQuery(function($) {
       return false;
     },
     insertFields: function(content, assoc, link) {
-      return $(content).insertBefore(link);
+      //return $(content).insertBefore(link);
+			total_lesson_hours++;
+			$('<li id="li'+total_lesson_hours+'"><a href="#tab'+total_lesson_hours+'" data-toggle="tab">第'+total_lesson_hours+'课时</a></li>').appendTo('#lesson_hours-tab-nav')
+			return $('<div class="tab-pane" id="tab'+total_lesson_hours+'">'+content+'</div>').appendTo('#lesson_hours-tab-content')
     },
     removeFields: function(e) {
       var link = e.currentTarget;
@@ -61,6 +65,8 @@ jQuery(function($) {
       var field = $(link).closest('.fields');
       field.hide();
       $(link).closest("form").trigger({ type: 'nested:fieldRemoved', field: field });
+			$('#li'+total_lesson_hours).remove();
+	    total_lesson_hours--;
       return false;
     }
   };

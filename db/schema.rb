@@ -19,17 +19,29 @@ ActiveRecord::Schema.define(:version => 20120313023123) do
   end
 
   create_table "lesson_hours", :force => true do |t|
-    t.string   "name"
-    t.integer  "lesson_id"
-    t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "lesson_id",           :null => false
+    t.text     "process_teacher"
+    t.text     "process_stu"
+    t.text     "process_idea"
+    t.text     "evaluate_blackboard"
+    t.text     "summary_homework"
+    t.text     "thinking"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "lessons", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "title",               :null => false
+    t.text     "goal_knowledge"
+    t.text     "goal_ability"
+    t.text     "goal_emotion"
+    t.text     "unit_emphasis"
+    t.text     "teaching_emphasis"
+    t.text     "teaching_difficulty"
+    t.text     "teaching_method"
+    t.text     "teaching_ready"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
 end

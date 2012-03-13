@@ -1,20 +1,39 @@
-<%= simple_nested_form_for(@lesson) do |f| %>
+<%= simple_nested_form_for(@lesson, html: {class: 'form-horizontal'}) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :name %>
-  </div>
+    <%= f.input :title %>
+		<%= f.input :goal_knowledge, :input_html => { :rows => 5 } %>
+		<%= f.input :goal_ability, :input_html => { :rows => 5 } %>
+		<%= f.input :goal_emotion, :input_html => { :rows => 5 } %>
+		<%= f.input :unit_emphasis, :input_html => { :rows => 5 } %>
+		<%= f.input :teaching_emphasis, :input_html => { :rows => 5 } %>
+		<%= f.input :teaching_difficulty, :input_html => { :rows => 5 } %>
+		<%= f.input :teaching_method, :input_html => { :rows => 5 } %>
+		<%= f.input :teaching_ready, :input_html => { :rows => 5 } %>
+		
+    <p><%= f.link_to_add "增加课时", :lesson_hours %></p>
 
-  <%= f.fields_for :lesson_hours do |lesson_hour_form| %>
-	  <%= lesson_hour_form.text_field :name %>
-	  <%= lesson_hour_form.link_to_remove "Remove this lesson_hour" %>
+    <div class="tabbable">
+		  <ul class="nav nav-tabs" id="lesson_hours-tab-nav"></ul>
+		  <div class="tab-content" id="lesson_hours-tab-content"></div>
+		</div>
+		
+		<div class="form-actions">
+	    <%= f.button :submit %>
+	  </div>
+	</div>
+
+	<%= f.fields_for :lesson_hours do |lesson_hour_form| %>
+
+		<%= lesson_hour_form.input :process_teacher, :input_html => { :rows => 5 } %>
+		<%= lesson_hour_form.input :process_stu, :input_html => { :rows => 5 } %>
+		<%= lesson_hour_form.input :process_idea, :input_html => { :rows => 5 } %>
+		<%= lesson_hour_form.input :evaluate_blackboard, :input_html => { :rows => 5 } %>
+		<%= lesson_hour_form.input :summary_homework, :input_html => { :rows => 5 } %>
+		<%= lesson_hour_form.input :thinking, :input_html => { :rows => 5 } %>
+	  <%= lesson_hour_form.link_to_remove "删除课时" %>
 	<% end %>
-	<p><%= f.link_to_add "Add a lesson_hour", :lesson_hours %></p>
-
-
 	
-	<div class="form-actions">
-    <%= f.button :submit %>
-  </div>
 <% end %>
 
