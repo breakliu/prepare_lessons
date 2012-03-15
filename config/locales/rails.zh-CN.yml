@@ -5,6 +5,7 @@ zh-CN:
       lesson_hour: "课时"
     attributes:
       lesson:
+        title: "备课主题"
         goal_knowledge: "知识目标"
         goal_ability: "能力目标"
         goal_emotion: "情感目标"

@@ -4,3 +4,35 @@
 
 <%= link_to 'Show', @lesson %> |
 <%= link_to 'Back', lessons_path %>
+
+
+<script type="text/javascript" charset="utf-8">
+
+//$('#lesson_hours-tab-menu .fields').html().appendTo('#lesson_hours-tab-menu');
+
+$('#lesson_hours-tab-menu').find('.fields').each(function() {
+	$($(this).html()).appendTo('#lesson_hours-tab-menu');
+	$(this).remove();
+	total_lesson_hours++;
+});
+$('#lesson_hours-tab-content').find('.fields').each(function() {
+	$($(this).html()).appendTo('#lesson_hours-tab-content');
+	$(this).remove();
+});
+
+$('#lesson_hours-tab-content').find('textarea').each(function(){
+	KindEditor.create('textarea[id="'+$(this).attr("id")+'"]', {
+		width: "99%",
+		resizeMode: 1,
+		allowFileManager: true,
+		resizeType: 1,
+		uploadJson: '/kindeditor/upload',
+		fileManagerJson: '/kindeditor/filemanager',
+		items : [
+			'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+			'insertunorderedlist', '|', 'emoticons', 'image', 'link'
+		]
+	});
+});
+</script>

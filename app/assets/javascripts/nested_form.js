@@ -1,5 +1,6 @@
+total_lesson_hours = 0;
+
 jQuery(function($) {
-	var total_lesson_hours = 0;
   window.NestedFormEvents = function() {
     this.addFields = $.proxy(this.addFields, this);
     this.removeFields = $.proxy(this.removeFields, this);
@@ -7,10 +8,14 @@ jQuery(function($) {
 
   NestedFormEvents.prototype = {
     addFields: function(e) {
+			if ( total_lesson_hours == 10 ) {
+				alert('已到达最大课时数')
+				return false;
+			}
       // Setup
       var link    = e.currentTarget;
       var assoc   = $(link).attr('data-association');            // Name of child
-      var content = $('#' + assoc + '_fields_blueprint').html(); // Fields template
+      var content = $('#' + assoc + '_fields_blueprint div div').html(); // Fields template
 
       // Make the context correct by replacing new_<parents> with the generated ID
       // of each of the parent objects
@@ -42,31 +47,64 @@ jQuery(function($) {
       var new_id  = new Date().getTime();
       content     = content.replace(regexp, "new_" + new_id);
 
+			var tmp = [ 
+				'process_teacher_',
+				'process_stu_',
+				'process_idea_',
+				'evaluate_blackboard_',
+				'summary_homework_',
+				'thinking_'
+			];
+			for ( var i=0; i<tmp.length; i++ ) {
+					content = content.replace(tmp[i], tmp[i] + '_' + new_id);
+			}
+
       var field = this.insertFields(content, assoc, link);
       $(link).closest("form")
         .trigger({ type: 'nested:fieldAdded', field: field })
         .trigger({ type: 'nested:fieldAdded:' + assoc, field: field });
+
+			$(content).find("textarea").each(function(){
+				KindEditor.create('textarea[id="'+$(this).attr("id")+'"]', {
+					width: "99%",
+					resizeType: 1,
+					allowFileManager: true,
+					uploadJson: '/kindeditor/upload',
+					fileManagerJson: '/kindeditor/filemanager',
+					items : [
+						'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+						'insertunorderedlist', '|', 'emoticons', 'image', 'link'
+					]
+				});
+			});
+			
       return false;
     },
     insertFields: function(content, assoc, link) {
       //return $(content).insertBefore(link);
 			total_lesson_hours++;
-			$('<li id="li'+total_lesson_hours+'"><a href="#tab'+total_lesson_hours+'" data-toggle="tab">第'+total_lesson_hours+'课时</a></li>').appendTo('#lesson_hours-tab-nav')
-			return $('<div class="tab-pane" id="tab'+total_lesson_hours+'">'+content+'</div>').appendTo('#lesson_hours-tab-content')
+			//alert(content);
+			$('<li><a href="#tab'+total_lesson_hours+'" data-toggle="tab">第'+total_lesson_hours+'课时</a></li>').appendTo('#lesson_hours-tab-menu');
+			
+			return $('<div class="tab-pane" id="tab'+total_lesson_hours+'">'+content+'</div>').appendTo('#lesson_hours-tab-content');
     },
     removeFields: function(e) {
       var link = e.currentTarget;
       var hiddenField = $(link).prev('input[type=hidden]');
       hiddenField.val('1');
-      // if (hiddenField) {
-      //   $(link).v
-      //   hiddenField.value = '1';
-      // }
+			
       var field = $(link).closest('.fields');
       field.hide();
-      $(link).closest("form").trigger({ type: 'nested:fieldRemoved', field: field });
-			$('#li'+total_lesson_hours).remove();
-	    total_lesson_hours--;
+      $(link).closest("form").trigger({ type: 'nested:fieldRemoved', field: field });		
+
+			var tab = hiddenField.parent();
+			var li = $('a[href="#'+tab.attr("id")+'"]').parent();
+			var input = li.next();
+			tab.hide();
+			li.hide();
+			input.hide();
+			
       return false;
     }
   };

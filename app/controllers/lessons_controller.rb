@@ -1,4 +1,5 @@
 class LessonsController < ApplicationController
+  include_kindeditor :only => [:new, :edit, :update, :create]
   # GET /lessons
   # GET /lessons.json
   def index
@@ -25,6 +26,7 @@ class LessonsController < ApplicationController
   # GET /lessons/new.json
   def new
     @lesson = Lesson.new
+    @lesson_hour = LessonHour.new
 
     respond_to do |format|
       format.html # new.html.erb
