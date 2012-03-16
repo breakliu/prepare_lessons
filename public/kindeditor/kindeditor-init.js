@@ -18,9 +18,12 @@ KindEditor.ready(function(K) {
 			uploadJson: '/kindeditor/upload',
 			fileManagerJson: '/kindeditor/filemanager',
 			items : [
-									'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-									'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-									'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+	      'undo', 'redo', '|', 'cut', 'copy', 'paste',
+	      'plainpaste', 'wordpaste', '|', 'subscript', 'superscript', 'clearhtml', '|',
+	      'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+	      'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 
+				'image','insertfile', 'table', '|', 'fullscreen', 'source'
+			]
 		});
 	}
 	

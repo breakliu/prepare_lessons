@@ -7,32 +7,44 @@
 
 
 <script type="text/javascript" charset="utf-8">
+KindEditor.ready(function(K) {
+	//$('#lesson_hours-tab-menu .fields').html().appendTo('#lesson_hours-tab-menu');
+	/* nested_form 会在外层加 .fields div， 这导致构建tab出问题，先去之 */
+	$('#lesson_hours-tab-menu .fields').each(function() {
+		$(this).children().appendTo('#lesson_hours-tab-menu');
+		$(this).remove();
+		total_lesson_hours++;
+	});
 
-//$('#lesson_hours-tab-menu .fields').html().appendTo('#lesson_hours-tab-menu');
+	$('#lesson_hours-tab-content .fields').each(function() {
+		$(this).children().appendTo('#lesson_hours-tab-content');
+		$(this).remove();
+	});
 
-$('#lesson_hours-tab-menu').find('.fields').each(function() {
-	$($(this).html()).appendTo('#lesson_hours-tab-menu');
-	$(this).remove();
-	total_lesson_hours++;
-});
-$('#lesson_hours-tab-content').find('.fields').each(function() {
-	$($(this).html()).appendTo('#lesson_hours-tab-content');
-	$(this).remove();
-});
-
-$('#lesson_hours-tab-content').find('textarea').each(function(){
-	KindEditor.create('textarea[id="'+$(this).attr("id")+'"]', {
-		width: "99%",
-		resizeMode: 1,
-		allowFileManager: true,
-		resizeType: 1,
-		uploadJson: '/kindeditor/upload',
-		fileManagerJson: '/kindeditor/filemanager',
-		items : [
-			'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-			'insertunorderedlist', '|', 'emoticons', 'image', 'link'
-		]
+	$('#lesson_hours-tab-content').children().each(function() {
+		$(this).find('textarea').each(function(index){
+			/* 前面三个是特别高的 */
+			var height = '200px';
+			if ( index <= 2 ) {
+				height = '600px';
+			}
+			KindEditor.create('textarea[id="'+$(this).attr("id")+'"]', {
+				width: "99%",
+				resizeMode: 1,
+				height: height,
+				allowFileManager: true,
+				resizeType: 1,
+				uploadJson: '/kindeditor/upload',
+				fileManagerJson: '/kindeditor/filemanager',
+				items : [
+		      'undo', 'redo', '|', 'cut', 'copy', 'paste',
+		      'plainpaste', 'wordpaste', '|', 'subscript', 'superscript', 'clearhtml', '|',
+		      'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+		      'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 
+					'image','insertfile', 'table', '|', 'fullscreen', 'source'
+				]
+			});
+		});
 	});
 });
 </script>

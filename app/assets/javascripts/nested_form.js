@@ -8,14 +8,14 @@ jQuery(function($) {
 
   NestedFormEvents.prototype = {
     addFields: function(e) {
-			if ( total_lesson_hours == 10 ) {
-				alert('已到达最大课时数')
-				return false;
-			}
+			// if ( total_lesson_hours == 10 ) {
+			// 	alert('已到达最大课时数')
+			// 	return false;
+			// }
       // Setup
       var link    = e.currentTarget;
       var assoc   = $(link).attr('data-association');            // Name of child
-      var content = $('#' + assoc + '_fields_blueprint div div').html(); // Fields template
+      var content = $('#' + assoc + '_fields_blueprint .fields div').html(); // Fields template
 
       // Make the context correct by replacing new_<parents> with the generated ID
       // of each of the parent objects
@@ -64,17 +64,24 @@ jQuery(function($) {
         .trigger({ type: 'nested:fieldAdded', field: field })
         .trigger({ type: 'nested:fieldAdded:' + assoc, field: field });
 
-			$(content).find("textarea").each(function(){
+			$(content).find("textarea").each(function(index){
+				var height = '200px';
+				if ( index <= 2 ) {
+					height = '600px';
+				}
 				KindEditor.create('textarea[id="'+$(this).attr("id")+'"]', {
 					width: "99%",
 					resizeType: 1,
+					height: height,
 					allowFileManager: true,
 					uploadJson: '/kindeditor/upload',
 					fileManagerJson: '/kindeditor/filemanager',
 					items : [
-						'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-						'insertunorderedlist', '|', 'emoticons', 'image', 'link'
+			      'undo', 'redo', '|', 'cut', 'copy', 'paste',
+			      'plainpaste', 'wordpaste', '|', 'subscript', 'superscript', 'clearhtml', '|',
+			      'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+			      'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 
+						'image','insertfile', 'table', '|', 'fullscreen', 'source'
 					]
 				});
 			});
@@ -86,7 +93,6 @@ jQuery(function($) {
 			total_lesson_hours++;
 			//alert(content);
 			$('<li><a href="#tab'+total_lesson_hours+'" data-toggle="tab">第'+total_lesson_hours+'课时</a></li>').appendTo('#lesson_hours-tab-menu');
-			
 			return $('<div class="tab-pane" id="tab'+total_lesson_hours+'">'+content+'</div>').appendTo('#lesson_hours-tab-content');
     },
     removeFields: function(e) {
@@ -98,13 +104,16 @@ jQuery(function($) {
       field.hide();
       $(link).closest("form").trigger({ type: 'nested:fieldRemoved', field: field });		
 
+			////////////////////////////////////////////////////// 删除当前课时
 			var tab = hiddenField.parent();
 			var li = $('a[href="#'+tab.attr("id")+'"]').parent();
 			var input = li.next();
 			tab.hide();
 			li.hide();
-			input.hide();
-			
+			if ( input.attr("type") == "hidden" ) {
+				input.hide();
+			}
+			/////////////////////////////////////////////////////
       return false;
     }
   };

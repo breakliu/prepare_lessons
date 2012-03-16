@@ -1,40 +1,72 @@
-<%= simple_nested_form_for(@lesson, :html => { }) do |f| %>
+<%= simple_nested_form_for(@lesson, :html => { :class => '.form-horizontal' } ) do |f| %>
   <%= f.error_notification %>
+<style type="text/css" media="screen">
+.span2 { text-align: center; }
+.row { margin-top: 10px; border-bottom: 1px solid #ddd;}
+.row .nobottom { border: none; }
+.row .nobottom .span4 label { text-align: center; font-size: 14px; font-weight: bold; }
+.height1 .span2 label {
+	height: 25px;
+	line-height: 25px;
+	font-size: 14px;
+	font-weight: bold;
+}
+.height2 .span2{
+	height: 610px;
+	line-height: 610px;
+	font-size: 14px;
+	font-weight: bold;
+}
+.padtop25{
+	padding-top: 5px;
+}
+.height3 .span2 label {
+	height: 180px;
+	line-height: 180px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+</style>
   <div class="form-inputs">
-		<div class="row">
-			<div class="span2"><h4><%= f.label :title %></h4></div>
+		<div class="row height1">
+			<div class="span2"><%= f.label :title %></div>
 			<div class="span10"><%= f.input_field :title %></div>
 		</div>
-		<div class="row">
-			<div class="span2"><h4>教学目标</h4></div>
+		<div class="row height2">
+			<div class="span2">教学目标</div>
 			<div class="span10">
 				<%= f.label :goal_knowledge %><%= f.input_field :goal_knowledge, :rows => 10, :id => "goal_knowledge" %>
+				<div class="padtop25"></div>
 				<%= f.label :goal_ability %><%= f.input_field :goal_ability, :rows => 10, :id => "goal_ability" %>
+				<div class="padtop25"></div>
 				<%= f.label :goal_emotion %><%= f.input_field :goal_emotion, :rows => 10, :id => "goal_emotion" %>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row height3">
 			<div class="span2"><h4><%= f.label :unit_emphasis %></h4></div>
 			<div class="span10"><%= f.input_field :unit_emphasis, :rows => 10, :id => "unit_emphasis" %></div>
 		</div>
-		<div class="row">
+		<div class="row height3">
 			<div class="span2"><h4><%= f.label :teaching_emphasis %></h4></div>
 			<div class="span10"><%= f.input_field :teaching_emphasis, :rows => 10, :id => "teaching_emphasis" %></div>
 		</div>
-		<div class="row">
+		<div class="row height3">
 			<div class="span2"><h4><%= f.label :teaching_difficulty %></h4></div>
 			<div class="span10"><%= f.input_field :teaching_difficulty, :rows => 10, :id => "teaching_difficulty" %></div>
 		</div>
-		<div class="row">
+		<div class="row height3">
 			<div class="span2"><h4><%= f.label :teaching_method %></h4></div>
 			<div class="span10"><%= f.input_field :teaching_method, :rows => 10, :id => "teaching_method" %></div>
 		</div>
-		<div class="row">
+		<div class="row height3">
 			<div class="span2"><h4><%= f.label :teaching_ready %></h4></div>
 			<div class="span10"><%= f.input_field :teaching_ready, :rows => 10, :id => "teaching_ready" %></div>
 		</div>
 		
-		<%= f.link_to_add "增加课时", :lesson_hours %>
+		<div class="padtop25"></div>
+		<%= f.link_to_add "增加课时", :lesson_hours, :class => "btn btn-success" %>
+		<div class="padtop25"></div>
 		
 		<div class="tabbable">
 		  <ul class="nav nav-tabs" id="lesson_hours-tab-menu">
@@ -48,8 +80,8 @@
 		  	<% idx = 1 %>
 				<%= f.fields_for :lesson_hours do |lesson_hour_form| %>
 			  <div class="tab-pane <%= "active" if idx == 1 %>" id="tab<%= idx %>">
-					<%= lesson_hour_form.link_to_remove "删除当前课时" %>
-					<div class="row">
+					<%= lesson_hour_form.link_to_remove "删除当前课时", :class => "btn btn-danger offset10", :confirm => "你确定删除当前课时吗？" %>
+					<div class="row nobottom">
 						<div class="span4"><%= lesson_hour_form.label :process_teacher %></div>
 						<div class="span4"><%= lesson_hour_form.label :process_stu %></div>
 						<div class="span4"><%= lesson_hour_form.label :process_idea %></div>
@@ -59,15 +91,15 @@
 						<div class="span4"><%= lesson_hour_form.input_field :process_stu, :rows => 30, :id => "process_stu_#{idx}" %></div>
 						<div class="span4"><%= lesson_hour_form.input_field :process_idea, :rows => 30, :id => "process_idea_#{idx}" %></div>
 					</div>
-					<div class="row">
+					<div class="row height3">
 						<div class="span2"><%= lesson_hour_form.label :evaluate_blackboard %></div>
 						<div class="span10"><%= lesson_hour_form.input_field :evaluate_blackboard, :rows => 10, :id => "evaluate_blackboard_#{idx}" %></div>
 					</div>
-					<div class="row">
+					<div class="row height3">
 						<div class="span2"><%= lesson_hour_form.label :summary_homework %></div>
 						<div class="span10"><%= lesson_hour_form.input_field :summary_homework, :rows => 10, :id => "summary_homework_#{idx}" %></div>
 					</div>
-					<div class="row">
+					<div class="row height3">
 						<div class="span2"><%= lesson_hour_form.label :thinking %></div>
 						<div class="span10"><%= lesson_hour_form.input_field :thinking, :rows => 10, :id => "thinking_#{idx}" %></div>
 					</div>
@@ -78,7 +110,7 @@
 		</div>
 	</div>
 	<div class="form-actions">
-		<%= f.button :submit %>
+		<%= f.button :submit, :class => "btn btn-primary" %>
 	</div>
 <% end %>
 
