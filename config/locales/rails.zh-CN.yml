@@ -6,6 +6,10 @@ zh-CN:
     attributes:
       lesson:
         title: "备课主题"
+        course: "科 目"
+        grade: "年 级"
+        volume: "册 数"
+        unit: "单 元"
         goal_knowledge: "知识目标"
         goal_ability: "能力目标"
         goal_emotion: "情感目标"

@@ -1,5 +1,5 @@
-<%= simple_nested_form_for(@lesson, :html => { :class => '.form-horizontal' } ) do |f| %>
-  <%= f.error_notification %>
+<%= simple_nested_form_for(@lesson, :html => { :class => 'form-horizontal' } ) do |f| %>
+  <%#= f.error_notification %>
 <style type="text/css" media="screen">
 .span2 { text-align: center; }
 .row { margin-top: 10px; border-bottom: 1px solid #ddd;}
@@ -16,6 +16,7 @@
 	line-height: 610px;
 	font-size: 14px;
 	font-weight: bold;
+	text-align: right;
 }
 .padtop25{
 	padding-top: 5px;
@@ -28,11 +29,15 @@
 }
 
 </style>
+
   <div class="form-inputs">
-		<div class="row height1">
-			<div class="span2"><%= f.label :title %></div>
-			<div class="span10"><%= f.input_field :title %></div>
-		</div>
+
+		<%= f.input :title %>
+		<%= f.input :course, :collection => Lesson::COURSES, include_blank: false %>
+		<%= f.input :grade, :collection => Lesson::GRADES, include_blank: false %>
+		<%= f.input :volume, :collection => Lesson::VOLUMES, include_blank: false %>
+		<%= f.input :unit, :collection => Lesson::UNITS, include_blank: false %>
+
 		<div class="row height2">
 			<div class="span2">教学目标</div>
 			<div class="span10">
@@ -112,5 +117,6 @@
 	<div class="form-actions">
 		<%= f.button :submit, :class => "btn btn-primary" %>
 	</div>
+
 <% end %>
 
