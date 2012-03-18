@@ -2,8 +2,8 @@ PrepareLessons::Application.routes.draw do
   resources :lesson_hours
 
   resources :lessons
-
-  resources :homes
+  
+  get '/show_lesson/:id' => "lessons#show2", :as => 'show_lesson'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -54,7 +54,7 @@ PrepareLessons::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'homes#index'
+  root :to => 'lessons#index2'
 
   # See how all your routes lay out with "rake routes"
 
