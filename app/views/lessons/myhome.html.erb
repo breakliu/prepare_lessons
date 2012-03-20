@@ -1,0 +1,29 @@
+<h2><%= current_user.username %>的备课</h2><span class="pull-right"><%= link_to '新建备课', new_lesson_path, :class => 'btn btn-primary'%></span>
+
+
+
+<table class="table table-striped">
+	<thead>
+  <tr>
+    <th style="width: 40%;">名 称</th>
+    <th style="width: 10%;">科 目</th>
+    <th style="width: 10%;">年 级</th>
+		<th style="width: 20%;">创建时间</th>
+    <th style="width: 20%;">操 作</th>
+  </tr>
+	</thead>
+	<tbody>
+<% @lessons.each do |lesson| %>
+  <tr>
+    <td><%= link_to lesson.title, show_lesson_path(lesson) %></td>
+		<td><%= lesson.course %></td>
+		<td><%= lesson.grade %></td>
+		<td><%= lesson.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+    <td><%= link_to '编 辑', edit_lesson_path(lesson), :class => 'btn btn-primary btn-mini' %>  <%= link_to '删 除', lesson, confirm: '您确定要删除吗?', method: :delete, :class => 'btn btn-danger btn-mini' %></td>
+  </tr>
+<% end %>
+	</tbody>
+</table>
+<%= will_paginate @awards, class: 'apple_pagination' %>
+
+

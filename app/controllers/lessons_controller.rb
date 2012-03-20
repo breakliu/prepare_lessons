@@ -1,4 +1,6 @@
+# coding: utf-8
 class LessonsController < ApplicationController
+  before_filter :require_login, :except => [:index, :index2, :show_lesson, :show, :course]
   include_kindeditor :only => [:new, :edit, :update, :create]
   # GET /lessons
   # GET /lessons.json
@@ -11,8 +13,30 @@ class LessonsController < ApplicationController
     end
   end
   
+  # root_url
   def index2
-    @lessons = Lesson.all
+    @chinese = Lesson.chinese_all
+    @math = Lesson.math_all
+    @english = Lesson.english_all
+    @zhonghe = Lesson.zhonghe_all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @lessons }
+    end
+  end
+  
+  def course
+    @lessons = Lesson.where(:course => Lesson::COURSES[params[:course_id].to_i]).paginate(:page => params[:page])
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @lessons }
+    end
+  end
+  
+  def myhome
+    @lessons = Lesson.where(:user_id => params[:user_id]).paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -31,7 +55,7 @@ class LessonsController < ApplicationController
     end
   end
   
-  def show2 
+  def show_lesson 
     @lesson = Lesson.find(params[:id])
 
     respond_to do |format|
@@ -61,14 +85,17 @@ class LessonsController < ApplicationController
   # POST /lessons.json
   def create
     @lesson = Lesson.new(params[:lesson])
+    
+    if logged_in? 
+      @lesson[:user_id] = current_user.id
+    end
 
     respond_to do |format|
       if @lesson.save
-        format.html { redirect_to @lesson, notice: 'Lesson was successfully created.' }
-        format.json { render json: @lesson, status: :created, location: @lesson }
+        format.html { redirect_to myhome_path(current_user), notice: '创建成功' } if logged_in?
+        format.html { redirect_to @lesson, notice: '创建成功' } if not logged_in?
       else
         format.html { render action: "new" }
-        format.json { render json: @lesson.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -80,11 +107,10 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       if @lesson.update_attributes(params[:lesson])
-        format.html { redirect_to @lesson, notice: 'Lesson was successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to myhome_path(current_user), notice: '更新成功' } if logged_in?
+        format.html { redirect_to @lesson, notice: '更新成功' } if not logged_in?
       else
         format.html { render action: "edit" }
-        format.json { render json: @lesson.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -96,8 +122,8 @@ class LessonsController < ApplicationController
     @lesson.destroy
 
     respond_to do |format|
-      format.html { redirect_to lessons_url }
-      format.json { head :no_content }
+      format.html { redirect_to myhome_path(current_user), notice: '删除成功' } if logged_in?
+      format.html { redirect_to lessons_url, notice: '删除成功' } if not logged_in?
     end
   end
 end

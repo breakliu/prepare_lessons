@@ -3,6 +3,7 @@ zh-CN:
     models:
       lesson: "备课"
       lesson_hour: "课时"
+      user: "用户"
     attributes:
       lesson:
         title: "备课主题"
@@ -25,6 +26,10 @@ zh-CN:
         evaluate_blackboard: "评价及板书设计"
         summary_homework: "小结及作业"
         thinking: "教学反思"
+      user:
+        username: "用户名"
+        password_confirmation: "再次输入密码"
+        password: "密码"
   date:
     abbr_day_names:
     - 日
