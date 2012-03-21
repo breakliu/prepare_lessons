@@ -13,11 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20120319062712) do
 
-  create_table "homes", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "kindeditor_assets", :force => true do |t|
     t.string   "asset"
     t.integer  "file_size"
