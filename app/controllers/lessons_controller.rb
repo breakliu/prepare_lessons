@@ -27,8 +27,9 @@ class LessonsController < ApplicationController
   end
   
   def course
-    @lessons = Lesson.where(:course => Lesson::COURSES[params[:course_id].to_i]).paginate(:page => params[:page])
-
+    @course = Lesson::COURSES[params[:course_id].to_i]
+    @lessons = Lesson.where(:course => @course).paginate(:page => params[:page])
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @lessons }

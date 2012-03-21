@@ -13,7 +13,8 @@ gem 'nested_form', :git => 'git://github.com/ryanb/nested_form.git'
 gem 'simple_form'
 gem 'rails_kindeditor'
 gem "carrierwave"
-gem "will_paginate"
+gem 'will_paginate'
+gem 'therubyracer'
 
 
 
