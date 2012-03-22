@@ -1,4 +1,5 @@
 class LessonHoursController < ApplicationController
+  load_and_authorize_resource
   include_kindeditor :only => [:new, :edit, :update, :create]
   # GET /lesson_hours
   # GET /lesson_hours.json

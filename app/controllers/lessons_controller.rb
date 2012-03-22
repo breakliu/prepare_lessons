@@ -1,5 +1,6 @@
 # coding: utf-8
 class LessonsController < ApplicationController
+  load_and_authorize_resource
   before_filter :require_login, :except => [:index, :index2, :show_lesson, :show, :course]
   include_kindeditor :only => [:new, :edit, :update, :create]
   # GET /lessons
