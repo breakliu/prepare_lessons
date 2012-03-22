@@ -11,7 +11,7 @@ class Lesson < ActiveRecord::Base
   
   attr_accessible :lesson_hours_attributes, :title, :goal_knowledge, :goal_ability, :goal_emotion, 
                   :unit_emphasis, :teaching_emphasis, :teaching_difficulty, :teaching_method, :teaching_ready,
-                  :course, :grade, :volume, :unit, :user_id
+                  :course, :grade, :volume, :unit, :user_id, :class_hour
   
   validates_presence_of :title
   

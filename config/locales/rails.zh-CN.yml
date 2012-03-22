@@ -7,6 +7,7 @@ zh-CN:
     attributes:
       lesson:
         title: "备课主题"
+        class_hour: "课 时"
         course: "科 目"
         grade: "年 级"
         volume: "册 数"

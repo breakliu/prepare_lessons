@@ -1,6 +1,7 @@
+<script type="text/javascript" charset="utf-8">
+$('.myhome').addClass('active');
+</script>
 <h2><%= current_user.username %>的备课</h2><span class="pull-right"><%= link_to '新建备课', new_lesson_path, :class => 'btn btn-primary'%></span>
-
-
 
 <table class="table table-striped">
 	<thead>
@@ -25,5 +26,3 @@
 	</tbody>
 </table>
 <%= will_paginate @awards, class: 'apple_pagination' %>
-
-

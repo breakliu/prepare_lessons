@@ -3,6 +3,11 @@
 <head>
   <title>西溪小学备课系统</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
   <%= include_kindeditor_if_needed %>
   <%= csrf_meta_tags %>
 </head>
@@ -28,10 +33,10 @@
 					  <input type="text" class="search-query" placeholder="Search">
 					</form-->
 					<ul class="nav">
-					  <li class="active"><%= link_to "主 页", root_path %></li>
-						<li><%= link_to Lesson::COURSES[0], course_path(0) %></li>
-						<li><%= link_to Lesson::COURSES[1], course_path(1) %></li>
-						<li><%= link_to Lesson::COURSES[2], course_path(2) %></li>
+					  <li class="homepage"><%= link_to "主页", root_path %></li>
+						<li class="chinese"><%= link_to Lesson::COURSES[0], course_path(0) %></li>
+						<li class="math"><%= link_to Lesson::COURSES[1], course_path(1) %></li>
+						<li class="english"><%= link_to Lesson::COURSES[2], course_path(2) %></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">综 合<b class="caret"></b></a>
 								<ul class="dropdown-menu">
@@ -47,14 +52,14 @@
 					</ul>
 					<ul class="nav pull-right">
 						<% if logged_in? %>
-							<li><%= link_to '<i class="icon-user icon-white"></i>'.html_safe + current_user.username, myhome_path(current_user) %></li>
+							<li class="myhome"><%= link_to '<i class="icon-user icon-white"></i>'.html_safe + current_user.username + '的备课', myhome_path(current_user) %></li>
 							<li class="divider-vertical"></li>
 						<% end %>
 					  <% if logged_in? %>
 							<li><%= link_to '<i class="icon-off icon-white"></i>'.html_safe + "注 销", logout_path %></li>
 						<% else %>
-						  <li><%= link_to "注 册", signup_path %></li>
-						  <li><%= link_to "登 陆", login_path %></li>
+						  <li class="signup"><%= link_to "注 册", signup_path %></li>
+						  <li class="login"><%= link_to "登 陆", login_path %></li>
 						<% end %>
 					</ul>
 					
@@ -64,7 +69,7 @@
 	</div>
 
 	<div class="container">
-		<ul class="breadcrumb"><%= yield :breadcrumb %></ul>
+		<!--ul class="breadcrumb"--><%#= yield :breadcrumb %><!--/ul-->
 		
 		<div class="row">
 		  <div class="span12">
@@ -79,11 +84,5 @@
 		</div>
 		<footer class="footer"><p>Copyright <%= Time.now.year %> 东莞市寮步镇西溪小学 | Developed by lcl</p></footer>
 	</div> <!-- /container -->
-	
-	<%= javascript_include_tag "application" %>
-	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-  <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
 </body>
 </html>

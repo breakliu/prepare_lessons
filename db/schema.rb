@@ -11,7 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120319062712) do
+ActiveRecord::Schema.define(:version => 20120322022752) do
+
+  create_table "homes", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "kindeditor_assets", :force => true do |t|
     t.string   "asset"
@@ -50,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20120319062712) do
     t.string   "volume"
     t.string   "unit"
     t.integer  "user_id"
+    t.string   "class_hour"
   end
 
   create_table "users", :force => true do |t|

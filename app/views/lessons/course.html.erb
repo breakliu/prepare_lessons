@@ -1,7 +1,14 @@
+<script type="text/javascript" charset="utf-8">
+var course = '<%= @course %>';
+if ( course == '语文' )
+	$('.chinese').addClass('active');
+else if ( course == '数学' ) 
+	$('.math').addClass('active');
+else if ( course == '英语' ) 
+	$('.english').addClass('active');
+</script>
+
 <h2><%= @course %></h2>
-
-
-
 <table class="table table-striped">
   <thead>
 	<tr>
@@ -23,5 +30,3 @@
 	</tbody>
 </table>
 <%= will_paginate @awards, class: 'apple_pagination' %>
-
-
