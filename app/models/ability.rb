@@ -11,7 +11,7 @@ class Ability
     #     can :read, :all
     #   end
     can :read, :all
-    can [:index2, :show_lesson, :course, :myhome], :all
+    can [:index2, :show_lesson, :course, :myhome, :search_lesson], :all
     can :manage, Lesson, :user_id => user.id
     #can :manage, LessonHour
     # The first argument to `can` is the action you are giving the user permission to do.

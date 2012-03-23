@@ -1,7 +1,7 @@
 # coding: utf-8
 class LessonsController < ApplicationController
   load_and_authorize_resource
-  before_filter :require_login, :except => [:index, :index2, :show_lesson, :show, :course]
+  before_filter :require_login, :except => [:index, :index2, :show_lesson, :show, :course, :search_lesson]
   include_kindeditor :only => [:new, :edit, :update, :create]
   # GET /lessons
   # GET /lessons.json
@@ -43,6 +43,38 @@ class LessonsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @lessons }
+    end
+  end
+  
+  def search_lesson
+    @lessons = []
+    @search_str = ''
+    if not params[:search_str].blank?
+      search_str = '%' + params[:search_str] + '%'
+    
+      # 搜lesson部分
+      lessons1 = Lesson.where(
+        "title like ? OR goal_knowledge like ? OR goal_ability like ? OR goal_emotion like ? OR unit_emphasis like ? OR \
+        teaching_emphasis like ? OR teaching_difficulty like ? OR teaching_method like ? OR teaching_ready like ? OR    \
+        course like ? OR grade like ? OR volume like ? OR unit like ? OR class_hour like ?", 
+        search_str, search_str, search_str, search_str, search_str, search_str, search_str, search_str, search_str, search_str, 
+        search_str, search_str, search_str, search_str
+      )
+    
+      # 搜lesson_hour部分
+      lessons2 = Lesson.joins(:lesson_hours).where(
+        "lesson_hours.process_teacher like ? OR lesson_hours.process_stu like ? OR lesson_hours.process_idea like ? OR  \
+        lesson_hours.evaluate_blackboard like ? OR lesson_hours.summary_homework like ? OR lesson_hours.thinking like ?", 
+        search_str, search_str, search_str, search_str, search_str, search_str
+      )
+    
+      @lessons = (lessons1 + lessons2).uniq.sort { |x, y| y.created_at <=> x.created_at } # 要uniq并且按时间排序
+      @search_str = params[:search_str]
+    end
+    
+    
+    respond_to do |format|
+      format.html # index.html.erb
     end
   end
 

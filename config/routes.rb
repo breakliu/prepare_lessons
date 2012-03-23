@@ -20,6 +20,7 @@ PrepareLessons::Application.routes.draw do
   #get '/new2_lesson/' => "lessons#new2", :as => 'new2_lesson'
   #post '/lessons2/' => "lessons2#create2", :as => 'lesson2'
   get '/course/:course_id' => "lessons#course", :as  => 'course'
+  post '/search_lesson/' => "lessons#search_lesson", :as => "search_lesson"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,20 +1,13 @@
 <style type="text/css" media="screen">
-.span2 { text-align: center; }
+.span2, .span1 { text-align: center; }
 .row { margin-top: 10px; border-bottom: 1px solid #ddd;}
 .row .nobottom { border: none; }
 .row .nobottom .span4 label { text-align: center; font-size: 14px; font-weight: bold; }
-.height1 .span2 label {
-	height: 25px;
-	line-height: 25px;
-	font-size: 14px;
-	font-weight: bold;
-}
-.height2 .span2{
+.height2 .span2, .height2 .span1{
 	height: 610px;
 	line-height: 610px;
 	font-size: 14px;
 	font-weight: bold;
-	text-align: right;
 }
 .padtop25{
 	padding-top: 5px;
@@ -25,7 +18,10 @@
 	font-size: 14px;
 	font-weight: bold;
 }
-
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover {
+	font-weight: bold;
+	color: black;
+}
 </style>
 
 <script type="text/javascript" charset="utf-8">
@@ -35,7 +31,6 @@ $('.myhome').addClass('active');
 <%= simple_nested_form_for(@lesson, :html => { :class => 'form-horizontal' } ) do |f| %>
   <%#= f.error_notification %>
   <div class="form-inputs">
-
 		<%= f.input :title %>
 		<%= f.input :class_hour, :collection => [1,2,3,4,5,6,7,8,9,10,11,12], include_blank: false %>
 		<%= f.input :course, :collection => Lesson::COURSES, include_blank: false %>
@@ -91,15 +86,20 @@ $('.myhome').addClass('active');
 				<%= f.fields_for :lesson_hours do |lesson_hour_form| %>
 			  <div class="tab-pane <%= "active" if idx == 1 %>" id="tab<%= idx %>">
 					<%= lesson_hour_form.link_to_remove "删除当前课时", :class => "btn btn-danger offset10", :confirm => "你确定删除当前课时吗？" %>
-					<div class="row nobottom">
-						<div class="span4"><%= lesson_hour_form.label :process_teacher %></div>
-						<div class="span4"><%= lesson_hour_form.label :process_stu %></div>
-						<div class="span4"><%= lesson_hour_form.label :process_idea %></div>
-					</div>
-					<div class="row">
-						<div class="span4"><%= lesson_hour_form.input_field :process_teacher, :rows => 30, :id => "process_teacher_#{idx}" %></div>
-						<div class="span4"><%= lesson_hour_form.input_field :process_stu, :rows => 30, :id => "process_stu_#{idx}" %></div>
-						<div class="span4"><%= lesson_hour_form.input_field :process_idea, :rows => 30, :id => "process_idea_#{idx}" %></div>
+					<div class="row height2">
+						<div class="span1">教学过程</div>
+						<div class="span11">
+							<div class="row nobottom">
+								<div class="span4"><%= lesson_hour_form.label :process_teacher %></div>
+								<div class="span4"><%= lesson_hour_form.label :process_stu %></div>
+								<div class="span3"><%= lesson_hour_form.label :process_idea %></div>
+							</div>
+							<div class="row">
+								<div class="span4"><%= lesson_hour_form.input_field :process_teacher, :rows => 30, :id => "process_teacher_#{idx}" %></div>
+								<div class="span4"><%= lesson_hour_form.input_field :process_stu, :rows => 30, :id => "process_stu_#{idx}" %></div>
+								<div class="span3"><%= lesson_hour_form.input_field :process_idea, :rows => 30, :id => "process_idea_#{idx}" %></div>
+							</div>
+						</div>
 					</div>
 					<div class="row height3">
 						<div class="span2"><%= lesson_hour_form.label :evaluate_blackboard %></div>
