@@ -67,7 +67,7 @@ jQuery(function($) {
 			$(content).find("textarea").each(function(index){
 				var height = '200px';
 				if ( index <= 2 ) {
-					height = '600px';
+					height = '700px';
 				}
 				KindEditor.create('textarea[id="'+$(this).attr("id")+'"]', {
 					width: "99%",
