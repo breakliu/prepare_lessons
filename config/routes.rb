@@ -15,7 +15,7 @@ PrepareLessons::Application.routes.draw do
 
   resources :lessons
   
-  get '/show_lesson/:id' => "lessons#show_lesson", :as => 'show_lesson'
+  get '/show_lesson/:id/(:flag)' => "lessons#show_lesson", :as => 'show_lesson'
   get '/myhome/:user_id' => "lessons#myhome", :as => 'myhome'
   #get '/new2_lesson/' => "lessons#new2", :as => 'new2_lesson'
   #post '/lessons2/' => "lessons2#create2", :as => 'lesson2'

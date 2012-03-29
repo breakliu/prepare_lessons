@@ -89,9 +89,23 @@ class LessonsController < ApplicationController
     end
   end
   
-  def show_lesson 
+  def show_lesson
     @lesson = Lesson.find(params[:id])
 
+    if params[:flag].blank?
+      ids = @lesson.user.lessons.pluck(:id)                                           # 用户自己的备课
+    else
+      if -1 == params[:flag].to_i
+        ids = Lesson.where(:course => Lesson::COURSES[3..-1]).pluck(:id)              # 综合科所有科目
+      else
+        ids = Lesson.where(:course => Lesson::COURSES[params[:flag].to_i]).pluck(:id) # 指定科目
+      end
+    end
+    
+    i = ids.index(params[:id].to_i)
+    @prev_lesson = ids.first == params[:id].to_i ? nil : Lesson.find(ids[i-1])
+    @next_lesson = ids.last == params[:id].to_i ? nil : Lesson.find(ids[i+1])
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @lesson }
