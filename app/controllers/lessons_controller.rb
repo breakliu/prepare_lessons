@@ -67,8 +67,13 @@ class LessonsController < ApplicationController
         lesson_hours.evaluate_blackboard like ? OR lesson_hours.summary_homework like ? OR lesson_hours.thinking like ?", 
         search_str, search_str, search_str, search_str, search_str, search_str
       )
+      
+      # 搜作者
+      user = User.find_by_username(params[:search_str])
+      lessons3 = []
+      lessons3 = user.lessons if not user.blank?
     
-      @lessons = (lessons1 + lessons2).uniq.sort { |x, y| y.created_at <=> x.created_at } # 要uniq并且按时间排序
+      @lessons = (lessons1 + lessons2 + lessons3).uniq.sort { |x, y| y.created_at <=> x.created_at } # 要uniq并且按时间排序
       @search_str = params[:search_str]
     end
     
