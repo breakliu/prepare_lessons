@@ -69,9 +69,10 @@ class LessonsController < ApplicationController
       )
       
       # 搜作者
-      user = User.find_by_username(params[:search_str])
       lessons3 = []
-      lessons3 = user.lessons if not user.blank?
+      User.where("username LIKE ?", search_str).each do |user|
+        lessons3 = user.lessons
+      end
     
       @lessons = (lessons1 + lessons2 + lessons3).uniq.sort { |x, y| y.created_at <=> x.created_at } # 要uniq并且按时间排序
       @search_str = params[:search_str]
