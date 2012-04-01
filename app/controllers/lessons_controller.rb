@@ -109,8 +109,8 @@ class LessonsController < ApplicationController
     end
     
     i = ids.index(params[:id].to_i)
-    @prev_lesson = ids.first == params[:id].to_i ? nil : Lesson.find(ids[i-1])
-    @next_lesson = ids.last == params[:id].to_i ? nil : Lesson.find(ids[i+1])
+    @next_lesson = ids.first == params[:id].to_i ? nil : Lesson.find(ids[i-1])
+    @prev_lesson = ids.last == params[:id].to_i ? nil : Lesson.find(ids[i+1])
     
     respond_to do |format|
       format.html # show.html.erb
