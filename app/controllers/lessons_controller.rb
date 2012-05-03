@@ -53,20 +53,22 @@ class LessonsController < ApplicationController
       search_str = '%' + params[:search_str] + '%'
     
       # 搜lesson部分
-      lessons1 = Lesson.where(
-        "title like ? OR goal_knowledge like ? OR goal_ability like ? OR goal_emotion like ? OR unit_emphasis like ? OR \
-        teaching_emphasis like ? OR teaching_difficulty like ? OR teaching_method like ? OR teaching_ready like ? OR    \
-        course like ? OR grade like ? OR volume like ? OR unit like ? OR class_hour like ?", 
-        search_str, search_str, search_str, search_str, search_str, search_str, search_str, search_str, search_str, search_str, 
-        search_str, search_str, search_str, search_str
-      )
+      #lessons1 = Lesson.where(
+      #  "title like ? OR goal_knowledge like ? OR goal_ability like ? OR goal_emotion like ? OR unit_emphasis like ? OR \
+      #  teaching_emphasis like ? OR teaching_difficulty like ? OR teaching_method like ? OR teaching_ready like ? OR    \
+      #  course like ? OR grade like ? OR volume like ? OR unit like ? OR class_hour like ?", 
+      #  search_str, search_str, search_str, search_str, search_str, search_str, search_str, search_str, search_str, search_str, 
+      #  search_str, search_str, search_str, search_str
+      #)
+      # 其实简单搜就好
+      lessons1 = Lesson.where("title like ? OR course like ? OR grade like ?", search_str, search_str, search_str)
     
       # 搜lesson_hour部分
-      lessons2 = Lesson.joins(:lesson_hours).where(
-        "lesson_hours.process_teacher like ? OR lesson_hours.process_stu like ? OR lesson_hours.process_idea like ? OR  \
-        lesson_hours.evaluate_blackboard like ? OR lesson_hours.summary_homework like ? OR lesson_hours.thinking like ?", 
-        search_str, search_str, search_str, search_str, search_str, search_str
-      )
+      #lessons2 = Lesson.joins(:lesson_hours).where(
+      #  "lesson_hours.process_teacher like ? OR lesson_hours.process_stu like ? OR lesson_hours.process_idea like ? OR  \
+      #  lesson_hours.evaluate_blackboard like ? OR lesson_hours.summary_homework like ? OR lesson_hours.thinking like ?", 
+      #  search_str, search_str, search_str, search_str, search_str, search_str
+      #)
       
       # 搜作者
       lessons3 = []
@@ -74,7 +76,10 @@ class LessonsController < ApplicationController
         lessons3 = user.lessons
       end
     
-      @lessons = (lessons1 + lessons2 + lessons3).uniq.sort { |x, y| y.created_at <=> x.created_at } # 要uniq并且按时间排序
+      @lessons = (lessons1 + lessons3).uniq.sort { |x, y| y.created_at <=> x.created_at } # 要uniq并且按时间排序
+      @search_str = params[:search_str]
+    else
+      @lessons = Lesson.all
       @search_str = params[:search_str]
     end
     
