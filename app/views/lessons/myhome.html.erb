@@ -1,15 +1,27 @@
 <script type="text/javascript" charset="utf-8">
 $('.myhome').addClass('active');
 </script>
+<style type="text/css">
+table.table thead tr th{
+  text-align: center;
+} 
+table.table tbody tr td.center{
+  text-align: center;
+} 
+</style>
+
 <h2><%= current_user.username %>的备课</h2><span class="pull-right"><%= link_to '新建备课', new_lesson_path, :class => 'btn btn-primary'%></span>
 
 <table class="table">
 	<thead>
   <tr>
-    <th style="width: 60%;">名 称</th>
+    <th style="width: 42%;">名 称</th>
+    <th style="width: 8%;">作 者</th>
     <th style="width: 8%;">科 目</th>
-    <th style="width: 6%;">年 级</th>
-		<th style="width: 12%;">创建时间</th>
+    <th style="width: 8%;">年 级</th>
+    <th style="width: 8%;">册 数</th>
+    <th style="width: 8%;">单 元</th>
+    <th style="width: 8%;">创建时间</th>
     <th style="width: 10%;">操 作</th>
   </tr>
 	</thead>
@@ -17,10 +29,13 @@ $('.myhome').addClass('active');
 <% @lessons.each do |lesson| %>
   <tr>
     <td><%= link_to lesson.title, show_lesson_path(lesson) %></td>
-		<td><%= lesson.course %></td>
-		<td><%= lesson.grade %></td>
-		<td><%= lesson.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-    <td><%= link_to '编 辑', edit_lesson_path(lesson), :class => 'btn btn-primary btn-mini' %>  <%= link_to '删 除', lesson, confirm: '您确定要删除吗?', method: :delete, :class => 'btn btn-danger btn-mini' %></td>
+		<td class="center"><%= lesson.user.username %></td>
+    <td class="center"><%= lesson.course %></td>
+    <td class="center"><%= lesson.grade %></td>
+    <td class="center"><%= lesson.volume %></td>
+    <td class="center"><%= lesson.unit %></td>
+		<td class="center"><%= lesson.created_at.strftime("%Y-%m-%d") %></td>
+    <td class="center"><%= link_to '编 辑', edit_lesson_path(lesson), :class => 'btn btn-primary btn-mini' %>  <%= link_to '删 除', lesson, confirm: '您确定要删除吗?', method: :delete, :class => 'btn btn-danger btn-mini' %></td>
   </tr>
 <% end %>
 	</tbody>

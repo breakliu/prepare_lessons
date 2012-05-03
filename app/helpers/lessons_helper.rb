@@ -9,8 +9,7 @@ module LessonsHelper
 		  ret += '<img src="/assets/new.gif" />' if Time.now - lesson.created_at < 3.days
 		  ret += '</td>'
 		  ret += '<td class="td2">' + lesson.user.username + '</td>'
-		  ret += '<td class="td3">' #+ lesson.created_at.strftime('%Y-%m-%d') 
-      ret += '</td>'
+		  ret += '<td class="td3">' + lesson.created_at.strftime('%Y-%m-%d') + '</td>'
 		  ret += '</tr>'
     end
     ret.html_safe

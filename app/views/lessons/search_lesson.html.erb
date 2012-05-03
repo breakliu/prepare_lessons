@@ -1,6 +1,10 @@
 <h2>共<%= @lessons.count %>个搜索结果</h2>
 <p>搜索内容为：<b><%= @search_str %></b></p>
-
+<style type="text/css">
+table.datatable tbody tr td.center {
+  text-align: center;
+} 
+</style>
 <table class="datatable">
   <thead>
 	<tr>
@@ -8,19 +12,21 @@
 		<th style="width: 8%;">科 目</th>
     <th style="width: 8%;">年 级</th>
     <th style="width: 8%;">册 数</th>
+    <th style="width: 8%;">单 元</th>
 		<th style="width: 8%;">作 者</th>
-		<%#th style="width: 15%;">创建时间</th%>
+		<th style="width: 8%;">创建时间</th>
   </tr>
 	</thead>
 	<tbody>
 <% @lessons.each do |lesson| %>
   <tr>
     <td><%= link_to lesson.title, show_lesson_path(lesson), target: '_blank' %></td>
-		<td><%= lesson.course %></td>
-		<td><%= lesson.grade %></td>
-		<td><%= lesson.volume %></td>
-		<td><%= lesson.user.username %></td>
-		<%#td%><%#= lesson.created_at.strftime("%Y-%m-%d %H:%M:%S") %><%#/td%>
+		<td class="center"><%= lesson.course %></td>
+		<td class="center"><%= lesson.grade %></td>
+		<td class="center"><%= lesson.volume %></td>
+    <td class="center"><%= lesson.unit %></td>
+		<td class="center"><%= lesson.user.username %></td>
+		<td class="center"><%= lesson.created_at.strftime("%Y-%m-%d") %></td>
   </tr>
 <% end %>
 	</tbody>
