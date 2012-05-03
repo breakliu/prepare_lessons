@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/rweng/jquery-datatables-rails.git
+  revision: dfe4d39c10b485828809cc75443232fbb16c3149
+  specs:
+    jquery-datatables-rails (1.9.1.3)
+      jquery-rails
+
+GIT
   remote: git://github.com/ryanb/nested_form.git
   revision: 486e0f0e93f3ca455d5d0fc7869053257b6afce2
   specs:
@@ -146,6 +153,7 @@ DEPENDENCIES
   cancan
   carrierwave
   coffee-rails (~> 3.2.1)
+  jquery-datatables-rails!
   jquery-rails
   nested_form!
   rails (= 3.2.2)
