@@ -7,11 +7,13 @@ class Lesson < ActiveRecord::Base
   
   has_many :lesson_hours, :dependent => :destroy
   belongs_to :user
+  belongs_to :term
   accepts_nested_attributes_for :lesson_hours, :reject_if => :all_blank, :allow_destroy => true
   
   attr_accessible :lesson_hours_attributes, :title, :goal_knowledge, :goal_ability, :goal_emotion, 
                   :unit_emphasis, :teaching_emphasis, :teaching_difficulty, :teaching_method, :teaching_ready,
-                  :course, :grade, :volume, :unit, :user_id, :class_hour
+                  :course, :grade, :volume, :unit, :user_id, :class_hour,
+                  :term_id
   
   validates_presence_of :title
   

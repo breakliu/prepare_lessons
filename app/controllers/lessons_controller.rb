@@ -1,7 +1,7 @@
 # coding: utf-8
 class LessonsController < ApplicationController
   load_and_authorize_resource
-  before_filter :require_login, :except => [:index, :index2, :show_lesson, :show, :course, :search_lesson]
+  before_filter :require_login, :except => [:index, :index2, :show_lesson, :show, :course, :search_lesson, :select_search, :advanced_search]
   include_kindeditor :only => [:new, :edit, :update, :create]
   # GET /lessons
   # GET /lessons.json
@@ -21,6 +21,32 @@ class LessonsController < ApplicationController
     @english = Lesson.english_all
     @zhonghe = Lesson.zhonghe_all
 
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @lessons }
+    end
+  end
+
+  def advanced_search
+    @users = User.all
+    @terms = Term.all
+    str = {}
+    str[:course] = params[:course] if not params[:course].blank?
+    str[:grade] = params[:grade] if not params[:grade].blank?
+    str[:term_id] = params[:term_id] if not params[:term_id].blank?
+    str[:user_id] = params[:user_id] if not params[:user_id].blank?
+    @lessons = Lesson.where(str);
+    
+    #@course = Lesson::COURSES[params[:course_id].to_i]
+    #@lessons = Lesson.where(:course => @course, 
+    #                        :term_id => params[:term_id], 
+    #                        :grade => params[:grade], 
+    #                        :user_id => params[:user_id])#.paginate(:page => params[:page])
+    @hours = 0
+    @lessons.each do |lesson|
+      @hours += lesson.class_hour.to_i
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @lessons }

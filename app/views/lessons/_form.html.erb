@@ -37,6 +37,7 @@ $('.myhome').addClass('active');
 		<%= f.input :grade, :collection => Lesson::GRADES, include_blank: false %>
 		<%= f.input :volume, :collection => Lesson::VOLUMES, include_blank: false %>
 		<%= f.input :unit, :collection => Lesson::UNITS, include_blank: false %>
+		<%= f.association :term, include_blank: false %>
 
 		<div class="row height2">
 			<div class="span2">教学目标</div>
