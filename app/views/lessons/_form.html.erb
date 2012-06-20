@@ -42,32 +42,33 @@ $('.myhome').addClass('active');
 		<div class="row height2">
 			<div class="span2">教学目标</div>
 			<div class="span10">
-				<%= f.label :goal_knowledge %><%= f.input_field :goal_knowledge, :rows => 10, :id => "goal_knowledge" %>
+
+				<%= f.label :goal_knowledge %><%= f.input_field :goal_knowledge, :as => :kindeditor, :height=>200 %>
 				<div class="padtop25"></div>
-				<%= f.label :goal_ability %><%= f.input_field :goal_ability, :rows => 10, :id => "goal_ability" %>
+				<%= f.label :goal_ability %><%= f.input_field :goal_ability, :as => :kindeditor, :height=>200 %>
 				<div class="padtop25"></div>
-				<%= f.label :goal_emotion %><%= f.input_field :goal_emotion, :rows => 10, :id => "goal_emotion" %>
+				<%= f.label :goal_emotion %><%= f.input_field :goal_emotion, :as => :kindeditor, :height=>200 %>
 			</div>
 		</div>
 		<div class="row height3">
 			<div class="span2"><h4><%= f.label :unit_emphasis %></h4></div>
-			<div class="span10"><%= f.input_field :unit_emphasis, :rows => 10, :id => "unit_emphasis" %></div>
+			<div class="span10"><%= f.input_field :unit_emphasis, :as => :kindeditor, :height=>200 %></div>
 		</div>
 		<div class="row height3">
 			<div class="span2"><h4><%= f.label :teaching_emphasis %></h4></div>
-			<div class="span10"><%= f.input_field :teaching_emphasis, :rows => 10, :id => "teaching_emphasis" %></div>
+			<div class="span10"><%= f.input_field :teaching_emphasis, :as => :kindeditor, :height=>200 %></div>
 		</div>
 		<div class="row height3">
 			<div class="span2"><h4><%= f.label :teaching_difficulty %></h4></div>
-			<div class="span10"><%= f.input_field :teaching_difficulty, :rows => 10, :id => "teaching_difficulty" %></div>
+			<div class="span10"><%= f.input_field :teaching_difficulty, :as => :kindeditor, :height=>200 %></div>
 		</div>
 		<div class="row height3">
 			<div class="span2"><h4><%= f.label :teaching_method %></h4></div>
-			<div class="span10"><%= f.input_field :teaching_method, :rows => 10, :id => "teaching_method" %></div>
+			<div class="span10"><%= f.input_field :teaching_method, :as => :kindeditor, :height=>200 %></div>
 		</div>
 		<div class="row height3">
 			<div class="span2"><h4><%= f.label :teaching_ready %></h4></div>
-			<div class="span10"><%= f.input_field :teaching_ready, :rows => 10, :id => "teaching_ready" %></div>
+			<div class="span10"><%= f.input_field :teaching_ready, :as => :kindeditor, :height=>200 %></div>
 		</div>
 		
 		<div class="padtop25"></div>
