@@ -1,0 +1,100 @@
+Assembly.Part
+Assembly.Parts
+p
+p.build_assembly
+User.first
+User.where('username like %1%')
+User.where('username like ''%1%''')
+User.where('username like "%1%"')
+User.where('username like "%2%"')
+User.where('username like "%3%"')
+User.where('username like "%3%"').lesson
+User.where('username like "%3%"').lessons
+User.where('username like "%3%"').lesson_ids
+User.where('username like "%3%"').lesson_id
+User.find_by_name('"%3%"').lesson_id
+User.find_by_name('"%3%"')
+User.find_by_name('3')
+User.find_by_username('3')
+User.find_by_username('%3%')
+ENV[:RUBY_VERSION]
+ENV["RUBY_VERSION"]
+ENV["RAILS_VERSION"]
+version
+version()
+this.version
+this.env
+env
+ENV
+VERSION
+VERSION::STRING
+this.environment
+this.environment.version
+self.environment.version
+environment
+RUBY_VERSION
+RAILS_VERSION
+Rails.version
+a=%w[a b c]
+a.index
+a.values_at
+a.values_at 1
+User.all
+a[0]
+b = a[0]
+b.to_s
+b.index
+b.to_str
+Lessons.all
+Lesson.all[0[
+]
+Lesson.all[0]
+b = Lesson.all[0]
+b.class
+b.kind_of?
+b
+b.id
+b[:id]
+b['id']
+Term.all
+Lesson.first
+Term.first.lessons
+Lesson.all
+a.where(:term_id=>2)
+Lesson.all.each do |l|
+l.term_id = 1
+  l.save
+end
+@s
+@lessons = Lesson.all
+@lessons = @lessons.where(:user_id=>1)
+@lessons = (@lessons).where(:user_id=>1)
+lessons = Lesson.all
+lessons = lessons.where(:user_id=>1)
+lessons.where(:user_id=>1)
+l = Lesson.all
+l
+l.where(:user_id=>1)
+a = Lesson.all
+a.where(:user_id=>1)
+a = Lesson.where(:user_id=>1)
+a.where(:term_id=>1)
+Lesson.where([:user_id=>1])
+Lesson.where({:user_id=>1})
+Lesson.where(:user_id=>1)
+Lesson.where({:user_id=>1,:term_id=>1})
+a={}
+a<<[a:1]
+a<<{a:1}
+a<<{[a:1]}
+a[:a]=1
+a[:b]=1
+a
+Plan.all
+Plan.first.user
+Plan.first
+Plan.destroy_all
+t = Time.now
+t.day
+10.ago
+30.times

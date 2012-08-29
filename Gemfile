@@ -9,7 +9,7 @@ gem 'sqlite3'
 gem 'thin'
 gem 'cancan'
 gem 'sorcery'
-gem 'nested_form'#, :git => 'git://github.com/ryanb/nested_form.git'
+#gem 'nested_form'#, :git => 'git://github.com/ryanb/nested_form.git'
 gem 'simple_form'
 gem 'rails_kindeditor'
 gem "carrierwave"
@@ -28,7 +28,7 @@ group :assets do
   # gem 'therubyracer'
 
   gem 'uglifier', '>= 1.0.3'
-  gem 'jquery-datatables-rails'#, :git => 'git://github.com/rweng/jquery-datatables-rails'
+  #gem 'jquery-datatables-rails'#, :git => 'git://github.com/rweng/jquery-datatables-rails'
 end
 
 gem 'jquery-rails'

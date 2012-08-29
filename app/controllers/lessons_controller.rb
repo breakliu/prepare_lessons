@@ -145,8 +145,14 @@ class LessonsController < ApplicationController
     @next_lesson = ids.first == params[:id].to_i ? nil : Lesson.find(ids[i-1])
     @prev_lesson = ids.last == params[:id].to_i ? nil : Lesson.find(ids[i+1])
     
+    # 兼容旧格式, WTF!!!
+    tpl = 'show_lesson.html.erb'
+    if @lesson.created_at < Time.new('2012','8','29')
+      tpl = 'show_lesson_old.html.erb'
+    end
+
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render tpl}# show.html.erb
       format.json { render json: @lesson }
     end
   end

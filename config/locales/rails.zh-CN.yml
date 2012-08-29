@@ -24,6 +24,7 @@ zh-CN:
         teaching_method: "教学方法"
         teaching_ready: "教学准备"
         term: "学 期"
+        content: "内 容"
       lesson_hour:
         process_teacher: "教师活动"
         process_stu: "学生活动"
