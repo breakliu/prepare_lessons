@@ -1,0 +1,50 @@
+<script type="text/javascript" charset="utf-8">
+$('.advanced_search').addClass('active');
+</script>
+<style type="text/css">
+table.table thead tr th{ text-align: center; } 
+table.table tbody tr td.center{ text-align: center; } 
+select { border: 1px solid #BBBBBB; width: auto; color: #000;}
+</style>
+
+<%= form_tag('/advanced_search') do %>
+  <b>姓名：</b><%= select_tag "user_id", options_from_collection_for_select(@users, "id", "username", params[:user_id]), :prompt => "全 部", onchange: "submit()" %>
+  <b>科目：</b><%= select_tag "course", options_for_select(Lesson::COURSES, params[:course]), :prompt => "全 部", onchange: "submit()" %>
+  <b>年级：</b><%= select_tag "grade", options_for_select(Lesson::GRADES, params[:grade]), :prompt => "全 部", onchange: "submit()" %>
+  <b>学期：</b><%= select_tag "term_id", options_from_collection_for_select(@terms, "id", "name", params[:term_id]), onchange: "submit()" %>
+<% end %>
+
+<span class="label label-info" style="font-size: 14px;">记录总数: <%= @lessons.size %></span>
+<span class="label label-info" style="font-size: 14px;">课时总数: <%= @hours %></span>
+
+<table class="table table-striped">
+  <thead>
+  	<tr>
+      <th style="width: 52%;">名 称</th>
+      <th style="width: 8%;">作 者</th>
+      <th style="width: 8%;">科 目</th>
+      <th style="width: 8%;">年 级</th>
+      <th style="width: 8%;">册 数</th>
+      <th style="width: 8%;">单 元</th>
+      <th style="width: 8%;">创建时间</th>
+    </tr>
+	</thead>
+	<tbody>
+<% @lessons.each do |lesson| %>
+  <tr>
+    <td><%= link_to lesson.title, show_lesson_path(lesson, course_type(lesson)), target: '_blank' %></td>
+	  <td class="center"><%= lesson.user.username %></td>
+	  <td class="center"><%= lesson.course %></td>
+	  <td class="center"><%= lesson.grade %></td>
+	  <td class="center"><%= lesson.volume %></td>
+    <td class="center"><%= lesson.unit %></td>
+	  <td class="center"><%= lesson.created_at.strftime("%Y-%m-%d") %></td>
+  </tr>
+<% end %>
+	</tbody>
+</table>
+
+<script language="Javascript">
+document.oncontextmenu=new Function("event.returnValue=false");
+document.onselectstart=new Function("event.returnValue=false");
+</script>

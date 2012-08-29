@@ -1,5 +1,11 @@
 PrepareLessons::Application.routes.draw do
   
+  resources :summarizes
+
+  resources :plans
+
+  resources :terms
+
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "signup" => "users#new", :as => "signup"
@@ -16,11 +22,15 @@ PrepareLessons::Application.routes.draw do
   resources :lessons
   
   get '/show_lesson/:id/(:flag)' => "lessons#show_lesson", :as => 'show_lesson'
-  get '/myhome/:user_id' => "lessons#myhome", :as => 'myhome'
+  get '/myhome/' => "lessons#myhome", :as => 'myhome'
+  #get '/myplan/:user_id' => "lessons#myplan", :as => 'myplan'
+  #get '/mysummarize/:user_id' => "lessons#mysummarize", :as => 'mysummarize'
   #get '/new2_lesson/' => "lessons#new2", :as => 'new2_lesson'
   #post '/lessons2/' => "lessons2#create2", :as => 'lesson2'
   get '/course/:course_id' => "lessons#course", :as  => 'course'
   post '/search_lesson/' => "lessons#search_lesson", :as => "search_lesson"
+  get '/advanced_search/' => "lessons#advanced_search", :as => "advanced_search"
+  post '/advanced_search/' => "lessons#advanced_search", :as => "advanced_search"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

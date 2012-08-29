@@ -1,3 +1,73 @@
 <h2>新建备课</h2>
 
+<% @lesson.content = '<table style="width:100%;border:1px solid black;font-size:16px;" border="1">
+	<tr>
+		<th style="border: 1px solid black;">课时</th>
+		<td style="border: 1px solid black;" colspan="2">12</td>
+	</tr>
+	<tr>
+		<th style="border: 1px solid black;" rowspan="3" width="4%">教学目标</th>
+		<th style="border: 1px solid black;" width="10%">知识目标</th>
+		<td style="border: 1px solid black;" width="86%"></td>
+	</tr>
+	<tr>
+		<th style="border: 1px solid black;" >能力目标</th>
+		<td style="border: 1px solid black;" ></td>
+	</tr>
+	<tr>
+		<th style="border: 1px solid black;" >情感目标</th>
+		<td style="border: 1px solid black;" ></td>
+	</tr>
+	<tr>
+		<th style="border: 1px solid black;" >单元训练重点</th>
+		<td style="border: 1px solid black;" colspan="2"></td>
+	</tr>
+	<tr>
+		<th style="border: 1px solid black;" >教学重点</th>
+		<td style="border: 1px solid black;"  colspan="2"></td>
+	</tr>
+	<tr>
+		<th style="border: 1px solid black;" >教学难点</th>
+		<td style="border: 1px solid black;"  colspan="2"></td>
+	</tr>
+	<tr>
+		<th style="border: 1px solid black;" >教学方法</th>
+		<td style="border: 1px solid black;"  colspan="2"></td>
+	</tr>
+	<tr>
+		<th style="border: 1px solid black;" >教学准备</th>
+		<td style="border: 1px solid black;"  colspan="2"></td>
+	</tr>
+</table>
+
+<br/>
+
+<table style="width:100%;border:1px solid black;font-size:16px;" border="1">
+	<tr>
+		<th style="border: 1px solid black; background-color: #ddd;"  colspan="4" >第1课时</th>
+	</tr>
+	<tr>
+		<th style="border: 1px solid black;"  rowspan="2" width="4%">教学过程</th>
+		<th style="border: 1px solid black;"  width="50%">教师活动</th>
+		<th style="border: 1px solid black;"  width="23%">学生活动</th>
+		<th style="border: 1px solid black;"  width="23%">设计意图</th>
+	</tr>
+	<tr>
+		<td style="border: 1px solid black;" >dfsdf</td>
+		<td style="border: 1px solid black;" ></td>
+		<td style="border: 1px solid black;" ></td>
+	</tr>
+	<tr>
+		<th style="border: 1px solid black;" >评价及板书设计</th>
+		<td style="border: 1px solid black;"  colspan="3"></td>
+	</tr>
+	<tr>
+		<th style="border: 1px solid black;" >小结及作业</th>
+		<td style="border: 1px solid black;"  colspan="3"></td>
+	</tr>
+	<tr>
+		<th style="border: 1px solid black;" >教学反思</th>
+		<td style="border: 1px solid black;"  colspan="3"></td>
+	</tr>
+</table>'.html_safe %>
 <%= render 'form' %>

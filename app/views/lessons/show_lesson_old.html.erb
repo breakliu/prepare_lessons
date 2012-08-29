@@ -1,0 +1,110 @@
+<style type="text/css" media="screen">
+.table-bordered th {
+	border-color: black;
+	text-align: center;
+	vertical-align: middle;
+}
+.table-bordered {
+	border-color: black;
+}
+.table-bordered td {
+	border-color: black;
+}
+.unstyled li {
+	text-align: center; 
+	font-size: 14px;
+	height: 20px;
+}
+</style>
+<div class="row">
+  <div class="span12">
+<%= link_to %(<i class="icon-arrow-left"></i>上一篇: #{@prev_lesson.title}).html_safe, show_lesson_path(@prev_lesson, course_type(@prev_lesson)), :class => 'pull-left' if @prev_lesson %>
+<%= link_to %(下一篇: #{@next_lesson.title}<i class="icon-arrow-right"></i>).html_safe, show_lesson_path(@next_lesson, course_type(@next_lesson)), :class => 'pull-right' if @next_lesson %>
+  </div>
+</div>
+<ul class="unstyled">
+	<li><b><%= @lesson.title %></b></li>
+	<li>
+		<span><%= @lesson.grade %></span>
+		<span><%= @lesson.course %></span>
+		<span><%= @lesson.volume %></span>
+		<span><%= @lesson.unit %></span>
+	</li>
+	<li>备课老师 <%= @lesson.user.username %></li>
+</ul>
+
+<table class="table table-bordered">
+	<tr>
+		<th>课时</th>
+		<td colspan="2"><%= @lesson.class_hour %></td>
+	</tr>
+	<tr>
+		<th rowspan="3" width="4%">教学目标</th>
+		<th width="10%">知识目标</th>
+		<td width="86%"><%= @lesson.goal_knowledge.html_safe %></td>
+	</tr>
+	<tr>
+		<th>能力目标</th>
+		<td><%= @lesson.goal_ability.html_safe %></td>
+	</tr>
+	<tr>
+		<th>情感目标</th>
+		<td><%= @lesson.goal_emotion.html_safe %></td>
+	</tr>
+	<tr>
+		<th>单元训练重点</th>
+		<td colspan="2"><%= @lesson.unit_emphasis.html_safe %></td>
+	</tr>
+	<tr>
+		<th>教学重点</th>
+		<td colspan="2"><%= @lesson.teaching_emphasis.html_safe %></td>
+	</tr>
+	<tr>
+		<th>教学难点</th>
+		<td colspan="2"><%= @lesson.teaching_difficulty.html_safe %></td>
+	</tr>
+	<tr>
+		<th>教学方法</th>
+		<td colspan="2"><%= @lesson.teaching_method.html_safe %></td>
+	</tr>
+	<tr>
+		<th>教学准备</th>
+		<td colspan="2"><%= @lesson.teaching_ready.html_safe %></td>
+	</tr>
+</table>
+
+<% @lesson.lesson_hours.each_with_index do |lh, index| %>
+<table class="table table-bordered">
+	<tr>
+		<th colspan="4" style="background-color: #ddd">第<%= index+1 %>课时</th>
+	</tr>
+	<tr>
+		<th rowspan="2" width="4%">教学过程</th>
+		<th width="50%">教师活动</th>
+		<th width="23%">学生活动</th>
+		<th width="23%">设计意图</th>
+	</tr>
+	<tr>
+		<td><%= lh.process_teacher.html_safe %></td>
+		<td><%= lh.process_stu.html_safe %></td>
+		<td><%= lh.process_idea.html_safe %></td>
+	</tr>
+	<tr>
+		<th>评价及板书设计</th>
+		<td colspan="3"><%= lh.evaluate_blackboard.html_safe %></td>
+	</tr>
+	<tr>
+		<th>小结及作业</th>
+		<td colspan="3"><%= lh.summary_homework.html_safe %></td>
+	</tr>
+	<tr>
+		<th>教学反思</th>
+		<td colspan="3"><%= lh.thinking.html_safe %></td>
+	</tr>
+</table>
+<% end %>
+
+<script language="Javascript">
+document.oncontextmenu=new Function("event.returnValue=false");
+document.onselectstart=new Function("event.returnValue=false");
+</script>

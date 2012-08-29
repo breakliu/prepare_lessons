@@ -1,6 +1,6 @@
 source 'http://ruby.taobao.org'
 
-gem 'rails', '3.2.2'
+gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -9,8 +9,7 @@ gem 'sqlite3'
 gem 'thin'
 gem 'cancan'
 gem 'sorcery'
-gem 'nested_form'
-#, :git => 'git://github.com/ryanb/nested_form.git'
+#gem 'nested_form'#, :git => 'git://github.com/ryanb/nested_form.git'
 gem 'simple_form'
 gem 'rails_kindeditor'
 gem "carrierwave"
@@ -29,8 +28,7 @@ group :assets do
   # gem 'therubyracer'
 
   gem 'uglifier', '>= 1.0.3'
-  gem 'jquery-datatables-rails'
-#, :git => 'git://github.com/rweng/jquery-datatables-rails'
+  #gem 'jquery-datatables-rails'#, :git => 'git://github.com/rweng/jquery-datatables-rails'
 end
 
 gem 'jquery-rails'

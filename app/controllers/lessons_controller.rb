@@ -1,7 +1,7 @@
 # coding: utf-8
 class LessonsController < ApplicationController
   load_and_authorize_resource
-  before_filter :require_login, :except => [:index, :index2, :show_lesson, :show, :course, :search_lesson]
+  before_filter :require_login, :except => [:index, :index2, :show_lesson, :show, :course, :search_lesson, :select_search, :advanced_search]
   include_kindeditor :only => [:new, :edit, :update, :create]
   # GET /lessons
   # GET /lessons.json
@@ -20,7 +20,35 @@ class LessonsController < ApplicationController
     @math = Lesson.math_all
     @english = Lesson.english_all
     @zhonghe = Lesson.zhonghe_all
+    @plans = Plan.limit(6).all
+    @summarizes = Summarize.limit(6).all
 
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @lessons }
+    end
+  end
+
+  def advanced_search
+    @users = User.all
+    @terms = Term.all
+    str = {}
+    str[:course] = params[:course] if not params[:course].blank?
+    str[:grade] = params[:grade] if not params[:grade].blank?
+    str[:term_id] = params[:term_id] if not params[:term_id].blank?
+    str[:user_id] = params[:user_id] if not params[:user_id].blank?
+    @lessons = Lesson.where(str);
+    
+    #@course = Lesson::COURSES[params[:course_id].to_i]
+    #@lessons = Lesson.where(:course => @course, 
+    #                        :term_id => params[:term_id], 
+    #                        :grade => params[:grade], 
+    #                        :user_id => params[:user_id])#.paginate(:page => params[:page])
+    @hours = 0
+    @lessons.each do |lesson|
+      @hours += lesson.class_hour.to_i
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @lessons }
@@ -38,7 +66,7 @@ class LessonsController < ApplicationController
   end
   
   def myhome
-    @lessons = Lesson.where(:user_id => params[:user_id]).paginate(:page => params[:page])
+    @lessons = Lesson.where(:user_id => current_user.id).paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -117,8 +145,14 @@ class LessonsController < ApplicationController
     @next_lesson = ids.first == params[:id].to_i ? nil : Lesson.find(ids[i-1])
     @prev_lesson = ids.last == params[:id].to_i ? nil : Lesson.find(ids[i+1])
     
+    # 兼容旧格式, WTF!!!
+    tpl = 'show_lesson.html.erb'
+    if @lesson.created_at < Time.new('2012','8','29')
+      tpl = 'show_lesson_old.html.erb'
+    end
+
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render tpl}# show.html.erb
       format.json { render json: @lesson }
     end
   end
@@ -151,7 +185,7 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       if @lesson.save
-        format.html { redirect_to myhome_path(current_user), notice: '创建成功' } if logged_in?
+        format.html { redirect_to myhome_path, notice: '创建成功' } if logged_in?
         format.html { redirect_to @lesson, notice: '创建成功' } if not logged_in?
       else
         format.html { render action: "new" }
@@ -166,7 +200,7 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       if @lesson.update_attributes(params[:lesson])
-        format.html { redirect_to myhome_path(current_user), notice: '更新成功' } if logged_in?
+        format.html { redirect_to myhome_path, notice: '更新成功' } if logged_in?
         format.html { redirect_to @lesson, notice: '更新成功' } if not logged_in?
       else
         format.html { render action: "edit" }
@@ -181,7 +215,7 @@ class LessonsController < ApplicationController
     @lesson.destroy
 
     respond_to do |format|
-      format.html { redirect_to myhome_path(current_user), notice: '删除成功' } if logged_in?
+      format.html { redirect_to myhome_path, notice: '删除成功' } if logged_in?
       format.html { redirect_to lessons_url, notice: '删除成功' } if not logged_in?
     end
   end

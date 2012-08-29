@@ -45,5 +45,19 @@ $('.homepage').addClass('active');
 		</table>
 	</div>
 </div>
+<div class="row">
+	<div class="span6">
+		<table class="table table-striped">
+			<thead><tr><td colspan="3">教学计划</td></tr></thead>
+			<tbody><%= index_plans(@plans) %></tbody>
+		</table>
+	</div>
+	<div class="span6">
+		<table class="table table-striped">
+			<thead><tr><td colspan="3">教学总结</td></tr></thead>
+			<tbody><%= index_summarizes(@summarizes) %></tbody>
+		</table>
+	</div>
+</div>
 
 <%#= link_to 'New Lesson', new_lesson_path %>

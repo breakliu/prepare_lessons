@@ -7,11 +7,13 @@ class Lesson < ActiveRecord::Base
   
   has_many :lesson_hours, :dependent => :destroy
   belongs_to :user
+  belongs_to :term
   accepts_nested_attributes_for :lesson_hours, :reject_if => :all_blank, :allow_destroy => true
   
   attr_accessible :lesson_hours_attributes, :title, :goal_knowledge, :goal_ability, :goal_emotion, 
                   :unit_emphasis, :teaching_emphasis, :teaching_difficulty, :teaching_method, :teaching_ready,
-                  :course, :grade, :volume, :unit, :user_id, :class_hour
+                  :course, :grade, :volume, :unit, :user_id, :class_hour,
+                  :term_id, :content
   
   validates_presence_of :title
   
@@ -20,18 +22,18 @@ class Lesson < ActiveRecord::Base
   default_scope :order => 'created_at desc'
   
   def self.chinese_all
-    limit(8).find_all_by_course(Lesson::COURSES[0])
+    limit(6).find_all_by_course(Lesson::COURSES[0])
   end
   
   def self.math_all
-    limit(8).find_all_by_course(Lesson::COURSES[1])
+    limit(6).find_all_by_course(Lesson::COURSES[1])
   end
   
   def self.english_all
-    limit(8).find_all_by_course(Lesson::COURSES[2])
+    limit(6).find_all_by_course(Lesson::COURSES[2])
   end
   
   def self.zhonghe_all
-    limit(8).find_all_by_course(Lesson::COURSES[3..-1])
+    limit(6).find_all_by_course(Lesson::COURSES[3..-1])
   end
 end

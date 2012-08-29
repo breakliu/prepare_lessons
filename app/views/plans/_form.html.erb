@@ -1,0 +1,21 @@
+<script type="text/javascript" charset="utf-8">
+$('.myplan').addClass('active');
+</script>
+
+<%= simple_form_for(@plan, :html => { :class => 'form-horizontal' } ) do |f| %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :course, :collection => Lesson::COURSES, include_blank: false %>
+    <%= f.association :term, include_blank: false %>
+    <div class="control-group kindeditor optional">
+    	<label class="kindeditor optional control-label" for="plan_content"> 内 容</label>
+    	<div class="controls"><%= kindeditor_tag 'plan[content]', content.html_safe, height: '1400' %></div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+	<%= f.button :submit, :class => "btn btn-primary" %>
+	<%= link_to '取 消', plans_path, :class => "btn" %>
+  </div>
+<% end %>

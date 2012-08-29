@@ -10,7 +10,9 @@ table.table tbody tr td.center{
 } 
 </style>
 
-<h2><%= current_user.username %>的备课</h2><span class="pull-right"><%= link_to '新建备课', new_lesson_path, :class => 'btn btn-primary'%></span>
+<h2><%= current_user.username %>的备课</h2>
+
+<span class="pull-right"><%= link_to '<i class="icon-plus icon-white"></i> 新建备课'.html_safe, new_lesson_path, :class => 'btn btn-primary'%></span>
 
 <table class="table">
 	<thead>
@@ -35,9 +37,9 @@ table.table tbody tr td.center{
     <td class="center"><%= lesson.volume %></td>
     <td class="center"><%= lesson.unit %></td>
 		<td class="center"><%= lesson.created_at.strftime("%Y-%m-%d") %></td>
-    <td class="center"><%= link_to '编 辑', edit_lesson_path(lesson), :class => 'btn btn-primary btn-mini' %>  <%= link_to '删 除', lesson, confirm: '您确定要删除吗?', method: :delete, :class => 'btn btn-danger btn-mini' %></td>
+    <td class="center"><%= link_to '编 辑', edit_lesson_path(lesson), :class => 'btn btn-primary btn-mini' if lesson.created_at >= Time.new('2012','9','1') %>  <%= link_to '删 除', lesson, confirm: '您确定要删除吗?', method: :delete, :class => 'btn btn-danger btn-mini' %></td>
   </tr>
 <% end %>
 	</tbody>
 </table>
-<%= will_paginate @awards, class: 'apple_pagination' %>
+<%= will_paginate @lessons, class: 'apple_pagination' %>
