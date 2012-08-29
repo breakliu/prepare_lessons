@@ -25,7 +25,7 @@
 		  background-repeat: no-repeat;
 		  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3f92d2', endColorstr='#3f92d2', GradientType=0);
 		}
-		body { padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */ }
+		body { padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */ color: #000; }
 		.footer p { color: #555555; margin-bottom: 0; }
 		.footer { border-top: 1px solid #E5E5E5;margin-top: 45px;padding: 35px 0 36px;}
 		.size14px { font-size: 14px; }
@@ -52,12 +52,12 @@
 	      <div class="nav-collapse">
 	        <!-- .nav, .navbar-search, .navbar-form, etc -->
 					<ul class="nav">
-					  <li class="homepage size14px"><%= link_to '<i class="icon-home icon-white"></i>'.html_safe + "首页", root_path %></li>
-						<li class="chinese size14px"><%= link_to '<i class="icon-book icon-white"></i>'.html_safe + Lesson::COURSES[0], course_path(0) %></li>
-						<li class="math size14px"><%= link_to '<i class="icon-book icon-white"></i>'.html_safe + Lesson::COURSES[1], course_path(1) %></li>
-						<li class="english size14px"><%= link_to '<i class="icon-book icon-white"></i>'.html_safe + Lesson::COURSES[2], course_path(2) %></li>
+					  <li class="homepage size14px"><%= link_to '<i class="icon-home icon-white"></i> 首页'.html_safe, root_path %></li>
+						<li class="chinese size14px"><%= link_to '<i class="icon-book icon-white"></i> '.html_safe + Lesson::COURSES[0], course_path(0) %></li>
+						<li class="math size14px"><%= link_to '<i class="icon-book icon-white"></i> '.html_safe + Lesson::COURSES[1], course_path(1) %></li>
+						<li class="english size14px"><%= link_to '<i class="icon-book icon-white"></i> '.html_safe + Lesson::COURSES[2], course_path(2) %></li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle size14px" data-toggle="dropdown"><i class="icon-th-list icon-white"></i>综 合<b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle size14px" data-toggle="dropdown"><i class="icon-th-list icon-white"></i> 综 合<b class="caret"></b></a>
 								<ul class="dropdown-menu size14px">
 							<% Lesson::COURSES[3..-1].each_with_index do |i,index| %>
 						    	<li><%= link_to '<i class="icon-book"></i>'.html_safe + i, course_path(index+3) %></li>
@@ -71,19 +71,21 @@
 					</form-->
 					
 					<ul class="nav">
-					  <li class="advanced_search size14px"><%= link_to '<i class="icon-search icon-white"></i>查找备课'.html_safe, advanced_search_path %></li>
+					  <li class="advanced_search size14px"><%= link_to '<i class="icon-search icon-white"></i> 查找备课'.html_safe, advanced_search_path %></li>
 					</ul>
 
 					<ul class="nav pull-right">
-						<% if logged_in? %>
-							<li class="myhome"><%= link_to '<i class="icon-user icon-white"></i>'.html_safe + current_user.username + '的备课', myhome_path(current_user) %></li>
+					<% if logged_in? %>
+              <li class="myhome size14px"><%= link_to '<i class="icon-user icon-white"></i> 备课'.html_safe, myhome_path %></li>
+						  <li class="myplan size14px"><%= link_to '<i class="icon-pencil icon-white"></i> 教学计划'.html_safe, plans_path %></li>
+              <li class="mysummarize size14px"><%= link_to '<i class="icon-inbox icon-white"></i> 教学总结'.html_safe, summarizes_path %></li>
 							<!--li class="divider-vertical"></li-->
 						<% end %>
 					  <% if logged_in? %>
-							<li><%= link_to '<i class="icon-off icon-white"></i>'.html_safe + "注 销", logout_path %></li>
+							<li class="size14px"><%= link_to '<i class="icon-off icon-white"></i> '.html_safe + "注 销", logout_path %></li>
 						<% else %>
-							<li class="login size14px"><%= link_to '<i class="icon-flag icon-white"></i>'.html_safe + "登 陆", login_path %></li>
-						  <li class="signup size14px"><%= link_to '<i class="icon-plus icon-white"></i>'.html_safe + "注 册", signup_path %></li>
+							<li class="login size14px"><%= link_to '<i class="icon-flag icon-white"></i> '.html_safe + "登 陆", login_path %></li>
+						  <li class="signup size14px"><%= link_to '<i class="icon-plus icon-white"></i> '.html_safe + "注 册", signup_path %></li>
 						<% end %>
 					</ul>
 					
@@ -107,7 +109,9 @@
 			</div>
 		</div>
 		<footer class="footer">
-			<p>Copyright <%= Time.now.year %> 东莞市寮步镇西溪小学 | Developed By LCL | Powered By Rails <%= Rails.version %></p>
+			<p>
+        <%= image_tag('xxlogo.png') %> Copyright <%= Time.now.year %> 东莞市寮步镇西溪小学 | Developed By LCL | Powered By Rails <%= Rails.version %>
+      </p>
 		</footer>
 	</div> <!-- /container -->
 </body>

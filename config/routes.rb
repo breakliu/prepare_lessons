@@ -1,5 +1,9 @@
 PrepareLessons::Application.routes.draw do
   
+  resources :summarizes
+
+  resources :plans
+
   resources :terms
 
   get "logout" => "sessions#destroy", :as => "logout"
@@ -18,7 +22,9 @@ PrepareLessons::Application.routes.draw do
   resources :lessons
   
   get '/show_lesson/:id/(:flag)' => "lessons#show_lesson", :as => 'show_lesson'
-  get '/myhome/:user_id' => "lessons#myhome", :as => 'myhome'
+  get '/myhome/' => "lessons#myhome", :as => 'myhome'
+  #get '/myplan/:user_id' => "lessons#myplan", :as => 'myplan'
+  #get '/mysummarize/:user_id' => "lessons#mysummarize", :as => 'mysummarize'
   #get '/new2_lesson/' => "lessons#new2", :as => 'new2_lesson'
   #post '/lessons2/' => "lessons2#create2", :as => 'lesson2'
   get '/course/:course_id' => "lessons#course", :as  => 'course'

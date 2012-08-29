@@ -5,6 +5,8 @@ zh-CN:
       lesson_hour: "课时"
       user: "用户"
       term: "学期"
+      plan: "教学计划"
+      summarize: "教学总结"
     attributes:
       lesson:
         title: "备课主题"
@@ -33,6 +35,16 @@ zh-CN:
         username: "用户名"
         password_confirmation: "再次输入密码"
         password: "密码"
+      plan:
+        title: "标 题"
+        course: "科 目"
+        term: "学 期"
+        content: "内 容"
+      summarize:
+        title: "标 题"
+        course: "科 目"
+        term: "学 期"
+        content: "内 容"
   date:
     abbr_day_names:
     - 日

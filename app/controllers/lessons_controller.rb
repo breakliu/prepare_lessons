@@ -20,6 +20,8 @@ class LessonsController < ApplicationController
     @math = Lesson.math_all
     @english = Lesson.english_all
     @zhonghe = Lesson.zhonghe_all
+    @plans = Plan.limit(6).all
+    @summarizes = Summarize.limit(6).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -64,7 +66,7 @@ class LessonsController < ApplicationController
   end
   
   def myhome
-    @lessons = Lesson.where(:user_id => params[:user_id]).paginate(:page => params[:page])
+    @lessons = Lesson.where(:user_id => current_user.id).paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -177,7 +179,7 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       if @lesson.save
-        format.html { redirect_to myhome_path(current_user), notice: '创建成功' } if logged_in?
+        format.html { redirect_to myhome_path, notice: '创建成功' } if logged_in?
         format.html { redirect_to @lesson, notice: '创建成功' } if not logged_in?
       else
         format.html { render action: "new" }
@@ -192,7 +194,7 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       if @lesson.update_attributes(params[:lesson])
-        format.html { redirect_to myhome_path(current_user), notice: '更新成功' } if logged_in?
+        format.html { redirect_to myhome_path, notice: '更新成功' } if logged_in?
         format.html { redirect_to @lesson, notice: '更新成功' } if not logged_in?
       else
         format.html { render action: "edit" }
@@ -207,7 +209,7 @@ class LessonsController < ApplicationController
     @lesson.destroy
 
     respond_to do |format|
-      format.html { redirect_to myhome_path(current_user), notice: '删除成功' } if logged_in?
+      format.html { redirect_to myhome_path, notice: '删除成功' } if logged_in?
       format.html { redirect_to lessons_url, notice: '删除成功' } if not logged_in?
     end
   end

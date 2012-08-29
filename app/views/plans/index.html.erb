@@ -1,0 +1,37 @@
+<script type="text/javascript" charset="utf-8">
+$('.myplan').addClass('active');
+</script>
+<style type="text/css">
+table.table thead tr th{
+  text-align: center;
+} 
+table.table tbody tr td.center{
+  text-align: center;
+} 
+</style>
+
+<h2><%= current_user.username %>的教学计划</h2><span class="pull-right"><%= link_to '<i class="icon-plus icon-white"></i> 新建教学计划'.html_safe, new_plan_path, :class => 'btn btn-primary'%></span>
+
+<table class="table">
+    <thead>
+  <tr>
+    <th style="width: 42%;">名 称</th>
+    <th style="width: 8%;">作 者</th>
+    <th style="width: 8%;">科 目</th>
+    <th style="width: 15%;">学 期</th>
+    <th style="width: 12%;">操 作</th>
+  </tr>
+    </thead>
+    <tbody>
+<% @plans.each do |plan| %>
+  <tr>
+    <td><%= link_to plan.title, plan_path(plan) %></td>
+    <td class="center"><%= plan.user.username if plan.user %></td>
+    <td class="center"><%= plan.course %></td>
+    <td class="center"><%= plan.term.name %></td>
+    <td class="center"><%= link_to '编 辑', edit_plan_path(plan), :class => 'btn btn-primary btn-mini' %>  <%= link_to '删 除', plan, confirm: '您确定要删除吗?', method: :delete, :class => 'btn btn-danger btn-mini' %></td>
+  </tr>
+<% end %>
+    </tbody>
+</table>
+<%= will_paginate @plans, class: 'apple_pagination' %>

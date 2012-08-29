@@ -1,0 +1,37 @@
+<script type="text/javascript" charset="utf-8">
+$('.mysummarize').addClass('active');
+</script>
+<style type="text/css">
+table.table thead tr th{
+  text-align: center;
+} 
+table.table tbody tr td.center{
+  text-align: center;
+} 
+</style>
+
+<h2><%= current_user.username %>的教学总结</h2><span class="pull-right"><%= link_to '<i class="icon-plus icon-white"></i> 新建教学总结'.html_safe, new_summarize_path, :class => 'btn btn-primary'%></span>
+
+<table class="table">
+    <thead>
+  <tr>
+    <th style="width: 42%;">名 称</th>
+    <th style="width: 8%;">作 者</th>
+    <th style="width: 8%;">科 目</th>
+    <th style="width: 15%;">学 期</th>
+    <th style="width: 12%;">操 作</th>
+  </tr>
+    </thead>
+    <tbody>
+<% @summarizes.each do |summarize| %>
+  <tr>
+    <td><%= link_to summarize.title, summarize_path(summarize) %></td>
+    <td class="center"><%= summarize.user.username if summarize.user %></td>
+    <td class="center"><%= summarize.course %></td>
+    <td class="center"><%= summarize.term.name %></td>
+    <td class="center"><%= link_to '编 辑', edit_summarize_path(summarize), :class => 'btn btn-primary btn-mini' %>  <%= link_to '删 除', summarize, confirm: '您确定要删除吗?', method: :delete, :class => 'btn btn-danger btn-mini' %></td>
+  </tr>
+<% end %>
+    </tbody>
+</table>
+<%= will_paginate @summarizes, class: 'apple_pagination' %>

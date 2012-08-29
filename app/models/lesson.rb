@@ -22,18 +22,18 @@ class Lesson < ActiveRecord::Base
   default_scope :order => 'created_at desc'
   
   def self.chinese_all
-    limit(8).find_all_by_course(Lesson::COURSES[0])
+    limit(6).find_all_by_course(Lesson::COURSES[0])
   end
   
   def self.math_all
-    limit(8).find_all_by_course(Lesson::COURSES[1])
+    limit(6).find_all_by_course(Lesson::COURSES[1])
   end
   
   def self.english_all
-    limit(8).find_all_by_course(Lesson::COURSES[2])
+    limit(6).find_all_by_course(Lesson::COURSES[2])
   end
   
   def self.zhonghe_all
-    limit(8).find_all_by_course(Lesson::COURSES[3..-1])
+    limit(6).find_all_by_course(Lesson::COURSES[3..-1])
   end
 end

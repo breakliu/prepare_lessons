@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="span12">
+    <%= link_to %(<i class="icon-arrow-left"></i>上一篇: #{@prev_plan.title}).html_safe, plan_path(@prev_plan), :class => 'pull-left' if @prev_plan %>
+    <%= link_to %(下一篇: #{@next_plan.title}<i class="icon-arrow-right"></i>).html_safe, plan_path(@next_plan), :class => 'pull-right' if @next_plan %>
+  </div>
+</div>
+
+<br/>
+
+<p>
+  <b>标题:</b>
+  <%= @plan.title %>
+</p>
+
+<p>
+  <b>作者:</b>
+  <%= @plan.user_id %>
+</p>
+
+<p>
+  <b>科目:</b>
+  <%= @plan.course %>
+</p>
+
+<p>
+  <b>学期:</b>
+  <%= @plan.term.name %>
+</p>
+
+<p>
+  <b>内容:</b>
+  <%= @plan.content.html_safe %>
+</p>
+
+
+
+
+<%#= link_to 'Edit', edit_plan_path(@plan) %>
+<%#= link_to 'Back', plans_path %>
