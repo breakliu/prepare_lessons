@@ -4,4 +4,6 @@ class Term < ActiveRecord::Base
   has_many :lessons
   has_many :plans
   has_many :summarizes
+
+  default_scope :order => 'created_at desc'
 end
