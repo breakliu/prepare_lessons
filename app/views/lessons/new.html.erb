@@ -3,7 +3,7 @@
 <% @lesson.content = '<table style="width:100%;border:1px solid black;font-size:16px;" border="1">
 	<tr>
 		<th style="border: 1px solid black;">课时</th>
-		<td style="border: 1px solid black;" colspan="2">12</td>
+		<td style="border: 1px solid black;" colspan="2"></td>
 	</tr>
 	<tr>
 		<th style="border: 1px solid black;" rowspan="3" width="4%">教学目标</th>
@@ -38,13 +38,14 @@
 		<th style="border: 1px solid black;" >教学准备</th>
 		<td style="border: 1px solid black;"  colspan="2"></td>
 	</tr>
-</table>
-
-<br/>
+</table>'
+10.times do |i|
+	@lesson.content +=
+	'<br/>
 
 <table style="width:100%;border:1px solid black;font-size:16px;" border="1">
 	<tr>
-		<th style="border: 1px solid black; background-color: #ddd;"  colspan="4" >第1课时</th>
+		<th style="border: 1px solid black; background-color: #ddd;"  colspan="4" >第'+(i+1).to_s+'课时</th>
 	</tr>
 	<tr>
 		<th style="border: 1px solid black;"  rowspan="2" width="4%">教学过程</th>
@@ -53,7 +54,7 @@
 		<th style="border: 1px solid black;"  width="23%">设计意图</th>
 	</tr>
 	<tr>
-		<td style="border: 1px solid black;" >dfsdf</td>
+		<td style="border: 1px solid black;" ></td>
 		<td style="border: 1px solid black;" ></td>
 		<td style="border: 1px solid black;" ></td>
 	</tr>
@@ -69,5 +70,8 @@
 		<th style="border: 1px solid black;" >教学反思</th>
 		<td style="border: 1px solid black;"  colspan="3"></td>
 	</tr>
-</table>'.html_safe %>
+</table>'
+end
+
+@lesson.content = @lesson.content.html_safe %>
 <%= render 'form' %>
