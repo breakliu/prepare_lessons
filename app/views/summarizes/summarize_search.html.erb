@@ -1,0 +1,31 @@
+<style type="text/css">
+table.table thead tr th{ text-align: center; } 
+table.table tbody tr td.center{ text-align: center; } 
+select { border: 1px solid #BBBBBB; width: auto; color: #000;}
+</style>
+
+<%= form_tag('/summarize_search') do %>
+  <b>姓名：</b><%= select_tag "user_id", options_from_collection_for_select(@users, "id", "username", params[:user_id]), :prompt => "全 部", onchange: "submit()" %>
+  <b>学期：</b><%= select_tag "term_id", options_from_collection_for_select(@terms, "id", "name", params[:term_id]), onchange: "submit()" %>
+<% end %>
+
+<span class="label label-info" style="font-size: 14px;">记录总数: <%= @summarizes.size %></span>
+
+<table class="table table-striped">
+  <thead>
+  	<tr>
+      <th style="width: 52%;">题 目</th>
+      <th style="width: 8%;">作 者</th>
+      <th style="width: 8%;">创建时间</th>
+    </tr>
+	</thead>
+	<tbody>
+<% @summarizes.each do |summarize| %>
+  <tr>
+    <td><%= link_to summarize.title, summarize_path(summarize), target: '_blank' %></td>
+	  <td class="center"><%= summarize.user.username %></td>
+	  <td class="center"><%= summarize.created_at.strftime("%Y-%m-%d") %></td>
+  </tr>
+<% end %>
+	</tbody>
+</table>

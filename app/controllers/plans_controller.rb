@@ -11,6 +11,15 @@ class PlansController < ApplicationController
     end
   end
 
+  def plan_list
+    @plans = Plan.paginate(:page => params[:page])
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @plans }
+    end
+  end
+
   # GET /plans/1
   # GET /plans/1.json
   def show
@@ -56,8 +65,8 @@ class PlansController < ApplicationController
 
     respond_to do |format|
       if @plan.save
-        format.html { redirect_to @plan, notice: '教学计划创建成功' }
-        format.json { render json: plans_path, status: :created, location: @plan }
+        format.html { redirect_to plans_path, notice: '教学计划创建成功' }
+        format.json { render json: @plan, status: :created, location: @plan }
       else
         format.html { render action: "new" }
         format.json { render json: @plan.errors, status: :unprocessable_entity }
@@ -90,6 +99,24 @@ class PlansController < ApplicationController
     respond_to do |format|
       format.html { redirect_to plans_url }
       format.json { head :no_content }
+    end
+  end
+
+  def plan_search
+    @users = User.all
+    @terms = Term.all
+    str = {}
+    if not params[:term_id].blank?
+      str[:term_id] = params[:term_id]
+    else
+      str[:term_id] = Term.first
+    end
+    str[:user_id] = params[:user_id] if not params[:user_id].blank?
+    @plans = Plan.where(str);
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @plans }
     end
   end
 end

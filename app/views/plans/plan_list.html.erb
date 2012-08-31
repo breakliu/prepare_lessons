@@ -1,0 +1,21 @@
+<h2>教学计划</h2>
+<table class="table table-striped">
+  <thead>
+  	<tr>
+      <th style="width: 52%;">题 目</th>
+      <th style="width: 8%;">作 者</th>
+      <th style="width: 8%;">创建时间</th>
+    </tr>
+	</thead>
+	<tbody>
+<% @plans.each do |plan| %>
+  <tr>
+    <td><%= link_to plan.title, plan_path(plan) %></td>
+	  <td class="center"><%= plan.user.username %></td>
+	  <td class="center"><%= plan.created_at.strftime("%Y-%m-%d") %></td>
+  </tr>
+<% end %>
+	</tbody>
+</table>
+
+<%= will_paginate @plans, class: 'apple_pagination' %>

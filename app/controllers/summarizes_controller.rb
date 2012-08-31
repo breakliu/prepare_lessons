@@ -11,6 +11,15 @@ class SummarizesController < ApplicationController
     end
   end
 
+  def summarize_list
+    @summarizes = Summarize.paginate(:page => params[:page])
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @summarizes }
+    end
+  end
+
   # GET /summarizes/1
   # GET /summarizes/1.json
   def show
@@ -90,6 +99,24 @@ class SummarizesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to summarizes_url }
       format.json { head :no_content }
+    end
+  end
+
+  def summarize_search
+    @users = User.all
+    @terms = Term.all
+    str = {}
+    if not params[:term_id].blank?
+      str[:term_id] = params[:term_id]
+    else
+      str[:term_id] = Term.first
+    end
+    str[:user_id] = params[:user_id] if not params[:user_id].blank?
+    @summarizes = Summarize.where(str);
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @summarizes }
     end
   end
 end

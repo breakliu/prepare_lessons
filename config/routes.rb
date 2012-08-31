@@ -1,8 +1,10 @@
 PrepareLessons::Application.routes.draw do
   
   resources :summarizes
+  get '/summarize_list/' => "summarizes#summarize_list", :as => 'summarize_list'
 
   resources :plans
+  get '/plan_list/' => "plans#plan_list", :as => 'plan_list'
 
   resources :terms
 
@@ -23,14 +25,19 @@ PrepareLessons::Application.routes.draw do
   
   get '/show_lesson/:id/(:flag)' => "lessons#show_lesson", :as => 'show_lesson'
   get '/myhome/' => "lessons#myhome", :as => 'myhome'
-  #get '/myplan/:user_id' => "lessons#myplan", :as => 'myplan'
-  #get '/mysummarize/:user_id' => "lessons#mysummarize", :as => 'mysummarize'
-  #get '/new2_lesson/' => "lessons#new2", :as => 'new2_lesson'
-  #post '/lessons2/' => "lessons2#create2", :as => 'lesson2'
+
   get '/course/:course_id' => "lessons#course", :as  => 'course'
   post '/search_lesson/' => "lessons#search_lesson", :as => "search_lesson"
+
   get '/advanced_search/' => "lessons#advanced_search", :as => "advanced_search"
   post '/advanced_search/' => "lessons#advanced_search", :as => "advanced_search"
+
+  get '/plan_search/' => "plans#plan_search", :as => "plan_search"
+  post '/plan_search/' => "plans#plan_search", :as => "plan_search"
+
+    get '/summarize_search/' => "summarizes#summarize_search", :as => "summarize_search"
+  post '/summarize_search/' => "summarizes#summarize_search", :as => "summarize_search"
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

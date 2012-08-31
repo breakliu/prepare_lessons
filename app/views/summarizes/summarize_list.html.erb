@@ -1,0 +1,21 @@
+<h2>教学总结</h2>
+<table class="table table-striped">
+  <thead>
+  	<tr>
+      <th style="width: 52%;">题 目</th>
+      <th style="width: 8%;">作 者</th>
+      <th style="width: 8%;">创建时间</th>
+    </tr>
+	</thead>
+	<tbody>
+<% @summarizes.each do |summarize| %>
+  <tr>
+    <td><%= link_to summarize.title, summarize_path(summarize) %></td>
+	  <td class="center"><%= summarize.user.username %></td>
+	  <td class="center"><%= summarize.created_at.strftime("%Y-%m-%d") %></td>
+  </tr>
+<% end %>
+	</tbody>
+</table>
+
+<%= will_paginate @summarizes, class: 'apple_pagination' %>

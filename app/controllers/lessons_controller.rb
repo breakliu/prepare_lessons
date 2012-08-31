@@ -35,8 +35,12 @@ class LessonsController < ApplicationController
     str = {}
     str[:course] = params[:course] if not params[:course].blank?
     str[:grade] = params[:grade] if not params[:grade].blank?
-    str[:term_id] = params[:term_id] if not params[:term_id].blank?
     str[:user_id] = params[:user_id] if not params[:user_id].blank?
+    if not params[:term_id].blank?
+      str[:term_id] = params[:term_id]
+    else
+      str[:term_id] = Term.first
+    end
     @lessons = Lesson.where(str);
     
     #@course = Lesson::COURSES[params[:course_id].to_i]
