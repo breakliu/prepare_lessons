@@ -10,7 +10,7 @@ $('.myplan').addClass('active');
     <%= f.association :term, include_blank: false %>
     <div class="control-group kindeditor optional">
     	<label class="kindeditor optional control-label" for="plan_content"> 内 容</label>
-    	<div class="controls"><%= kindeditor_tag 'plan[content]', content.html_safe, height: '1400' %></div>
+    	<div class="controls"><%= kindeditor_tag 'plan[content]', content.html_safe, height: '900' %></div>
     </div>
   </div>
 
