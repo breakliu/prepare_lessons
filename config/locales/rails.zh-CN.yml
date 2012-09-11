@@ -41,6 +41,7 @@ zh-CN:
         course: "科 目"
         term: "学 期"
         content: "内 容"
+        grade: "年 级"
       summarize:
         title: "标 题"
         course: "科 目"

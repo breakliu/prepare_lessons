@@ -6,6 +6,8 @@ select { border: 1px solid #BBBBBB; width: auto; color: #000;}
 
 <%= form_tag('/plan_search') do %>
   <b>姓名：</b><%= select_tag "user_id", options_from_collection_for_select(@users, "id", "username", params[:user_id]), :prompt => "全 部", onchange: "submit()" %>
+  <b>年级：</b><%= select_tag "grade", options_for_select(Lesson::GRADES, params[:grade]), :prompt => "全 部", onchange: "submit()" %>
+  <b>科目：</b><%= select_tag "course", options_for_select(Lesson::COURSES, params[:course]), :prompt => "全 部", onchange: "submit()" %>
   <b>学期：</b><%= select_tag "term_id", options_from_collection_for_select(@terms, "id", "name", params[:term_id]), onchange: "submit()" %>
 <% end %>
 
@@ -16,7 +18,9 @@ select { border: 1px solid #BBBBBB; width: auto; color: #000;}
   	<tr>
       <th style="width: 52%;">题 目</th>
       <th style="width: 8%;">作 者</th>
-      <th style="width: 8%;">创建时间</th>
+      <th style="width: 8%;">科 目</th>
+      <th style="width: 8%;">年 级</th>
+      <th style="width: 15%;">学 期</th>
     </tr>
 	</thead>
 	<tbody>
@@ -24,7 +28,9 @@ select { border: 1px solid #BBBBBB; width: auto; color: #000;}
   <tr>
     <td><%= link_to plan.title, plan_path(plan), target: '_blank' %></td>
 	  <td class="center"><%= plan.user.username %></td>
-	  <td class="center"><%= plan.created_at.strftime("%Y-%m-%d") %></td>
+	  <td class="center"><%= plan.course %></td>
+    <td class="center"><%= plan.grade %></td>
+    <td class="center"><%= plan.term.name %></td>
   </tr>
 <% end %>
 	</tbody>

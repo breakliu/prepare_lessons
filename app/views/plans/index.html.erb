@@ -18,6 +18,7 @@ table.table tbody tr td.center{
     <th style="width: 42%;">名 称</th>
     <th style="width: 8%;">作 者</th>
     <th style="width: 8%;">科 目</th>
+    <th style="width: 8%;">年 级</th>
     <th style="width: 15%;">学 期</th>
     <th style="width: 12%;">操 作</th>
   </tr>
@@ -28,6 +29,7 @@ table.table tbody tr td.center{
     <td><%= link_to plan.title, plan_path(plan) %></td>
     <td class="center"><%= plan.user.username if plan.user %></td>
     <td class="center"><%= plan.course %></td>
+    <td class="center"><%= plan.grade if plan.grade %></td>
     <td class="center"><%= plan.term.name %></td>
     <td class="center"><%= link_to '编 辑', edit_plan_path(plan), :class => 'btn btn-primary btn-mini' %>  <%= link_to '删 除', plan, confirm: '您确定要删除吗?', method: :delete, :class => 'btn btn-danger btn-mini' %></td>
   </tr>

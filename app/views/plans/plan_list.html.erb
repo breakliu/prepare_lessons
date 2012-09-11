@@ -4,7 +4,10 @@
   	<tr>
       <th style="width: 52%;">题 目</th>
       <th style="width: 8%;">作 者</th>
-      <th style="width: 8%;">创建时间</th>
+      <th style="width: 8%;">科 目</th>
+      <th style="width: 8%;">年 级</th>
+      <th style="width: 15%;">学 期</th>
+      <!--th style="width: 8%;">创建时间</th-->
     </tr>
 	</thead>
 	<tbody>
@@ -12,7 +15,10 @@
   <tr>
     <td><%= link_to plan.title, plan_path(plan) %></td>
 	  <td class="center"><%= plan.user.username %></td>
-	  <td class="center"><%= plan.created_at.strftime("%Y-%m-%d") %></td>
+    <td class="center"><%= plan.course %></td>
+    <td class="center"><%= plan.grade %></td>
+    <td class="center"><%= plan.term.name %></td>
+	  <!--td class="center"><%#= plan.created_at.strftime("%Y-%m-%d") %></td-->
   </tr>
 <% end %>
 	</tbody>

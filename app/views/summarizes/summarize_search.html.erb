@@ -16,7 +16,7 @@ select { border: 1px solid #BBBBBB; width: auto; color: #000;}
   	<tr>
       <th style="width: 52%;">题 目</th>
       <th style="width: 8%;">作 者</th>
-      <th style="width: 8%;">创建时间</th>
+      <th style="width: 15%;">学 期</th>
     </tr>
 	</thead>
 	<tbody>
@@ -24,7 +24,7 @@ select { border: 1px solid #BBBBBB; width: auto; color: #000;}
   <tr>
     <td><%= link_to summarize.title, summarize_path(summarize), target: '_blank' %></td>
 	  <td class="center"><%= summarize.user.username %></td>
-	  <td class="center"><%= summarize.created_at.strftime("%Y-%m-%d") %></td>
+	  <td class="center"><%= summarize.term.name %></td>
   </tr>
 <% end %>
 	</tbody>

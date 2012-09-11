@@ -17,7 +17,7 @@ table.table tbody tr td.center{
   <tr>
     <th style="width: 42%;">名 称</th>
     <th style="width: 8%;">作 者</th>
-    <th style="width: 8%;">科 目</th>
+    <!--th style="width: 8%;">科 目</th-->
     <th style="width: 15%;">学 期</th>
     <th style="width: 12%;">操 作</th>
   </tr>
@@ -27,7 +27,7 @@ table.table tbody tr td.center{
   <tr>
     <td><%= link_to summarize.title, summarize_path(summarize) %></td>
     <td class="center"><%= summarize.user.username if summarize.user %></td>
-    <td class="center"><%= summarize.course %></td>
+    <!--td class="center"><%= summarize.course %></td-->
     <td class="center"><%= summarize.term.name %></td>
     <td class="center"><%= link_to '编 辑', edit_summarize_path(summarize), :class => 'btn btn-primary btn-mini' %>  <%= link_to '删 除', summarize, confirm: '您确定要删除吗?', method: :delete, :class => 'btn btn-danger btn-mini' %></td>
   </tr>

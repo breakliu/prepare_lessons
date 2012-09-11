@@ -112,6 +112,8 @@ class PlansController < ApplicationController
       str[:term_id] = Term.first
     end
     str[:user_id] = params[:user_id] if not params[:user_id].blank?
+    str[:course] = params[:course] if not params[:course].blank?
+    str[:grade] = params[:grade] if not params[:grade].blank?
     @plans = Plan.where(str);
 
     respond_to do |format|

@@ -19,13 +19,13 @@ table.table tbody tr td.center{
 <table class="table table-striped">
   <thead>
   	<tr>
-      <th style="width: 52%;">名 称</th>
+      <th style="width: 40%;">名 称</th>
       <th style="width: 8%;">作 者</th>
       <th style="width: 8%;">科 目</th>
       <th style="width: 8%;">年 级</th>
       <th style="width: 8%;">册 数</th>
       <th style="width: 8%;">单 元</th>
-      <th style="width: 8%;">创建时间</th>
+      <th style="width: 15%;">学 期</th>
     </tr>
 	</thead>
 	<tbody>
@@ -37,7 +37,7 @@ table.table tbody tr td.center{
 	  <td class="center"><%= lesson.grade %></td>
 	  <td class="center"><%= lesson.volume %></td>
     <td class="center"><%= lesson.unit %></td>
-	  <td class="center"><%= lesson.created_at.strftime("%Y-%m-%d") %></td>
+	  <td class="center"><%= lesson.term.name %></td>
   </tr>
 <% end %>
 	</tbody>
