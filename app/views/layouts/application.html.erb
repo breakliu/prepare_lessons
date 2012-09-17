@@ -92,7 +92,7 @@
 					<ul class="nav pull-right">
 					<% if logged_in? %>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle size14px" data-toggle="dropdown"><i class="icon-user icon-white"></i> <%=current_user.username%>的菜单<b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle size14px" data-toggle="dropdown"><i class="icon-user icon-white"></i> <%=current_user.username%><b class="caret"></b></a>
 							<ul class="dropdown-menu size14px">
 						    	<li><%= link_to '<i class="icon-file"></i> 备课'.html_safe, myhome_path %></li>
 						    	<li><%= link_to '<i class="icon-pencil"></i> 教学计划'.html_safe, plans_path %></li>
