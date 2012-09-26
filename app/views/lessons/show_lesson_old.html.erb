@@ -17,8 +17,8 @@
 }
 </style>
 <ul class="pager">
-  <li class="previous"><%= link_to %(&larr; 上一篇: #{@prev.title}).html_safe, show_lesson_path(@prev) if @prev %></li>
-  <li class="next"><%= link_to %(下一篇: #{@next.title} &rarr;).html_safe, show_lesson_path(@next) if @next %></li>
+  <li class="previous"><%= link_to %(&larr; 上一篇: #{@prev.title}).html_safe, show_lesson_path(@prev, course_type(@prev)) if @prev %></li>
+  <li class="next"><%= link_to %(下一篇: #{@next.title} &rarr;).html_safe, show_lesson_path(@next, course_type(@next)) if @next %></li>
 </ul>
 <ul class="unstyled">
 	<li><b><%= @lesson.title %></b></li>
