@@ -16,12 +16,10 @@
 	height: 20px;
 }
 </style>
-<div class="row">
-  <div class="span12">
-<%= link_to %(<i class="icon-arrow-left"></i>上一篇: #{@prev_lesson.title}).html_safe, show_lesson_path(@prev_lesson, course_type(@prev_lesson)), :class => 'pull-left' if @prev_lesson %>
-<%= link_to %(下一篇: #{@next_lesson.title}<i class="icon-arrow-right"></i>).html_safe, show_lesson_path(@next_lesson, course_type(@next_lesson)), :class => 'pull-right' if @next_lesson %>
-  </div>
-</div>
+<ul class="pager">
+  <li class="previous"><%= link_to %(&larr; 上一篇: #{@prev.title}).html_safe, show_lesson_path(@prev) if @prev %></li>
+  <li class="next"><%= link_to %(下一篇: #{@next.title} &rarr;).html_safe, show_lesson_path(@next) if @next %></li>
+</ul>
 <ul class="unstyled">
 	<li><b><%= @lesson.title %></b></li>
 	<li>

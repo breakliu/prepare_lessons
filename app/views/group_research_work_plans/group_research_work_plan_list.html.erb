@@ -1,0 +1,28 @@
+<style type="text/css">
+table.table thead tr th { text-align: center; } 
+table.table tbody tr td.center { text-align: center; }
+</style>
+
+<h2>科组教研工作计划</h2>
+
+<table class="table">
+    <thead>
+  <tr>
+    <th style="width: 42%;">名 称</th>
+    <th style="width: 8%;">作 者</th>
+    <th style="width: 8%;">科 组</th>
+    <th style="width: 15%;">学 期</th>
+  </tr>
+    </thead>
+    <tbody>
+<% @group_research_work_plans.each do |group_research_work_plan| %>
+  <tr>
+    <td><%= link_to group_research_work_plan.title, group_research_work_plan_path(group_research_work_plan) %></td>
+    <td class="center"><%= group_research_work_plan.user.username if group_research_work_plan.user %></td>
+    <td class="center"><%= group_research_work_plan.group.name %></td>
+    <td class="center"><%= group_research_work_plan.term.name %></td>
+  </tr>
+<% end %>
+    </tbody>
+</table>
+<%= will_paginate @group_research_work_plans, class: 'apple_pagination' %>

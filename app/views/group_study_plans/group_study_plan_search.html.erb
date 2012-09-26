@@ -1,0 +1,34 @@
+<style type="text/css">
+table.table thead tr th{ text-align: center; } 
+table.table tbody tr td.center{ text-align: center; } 
+select { border: 1px solid #BBBBBB; width: auto; color: #000;}
+</style>
+
+<%= form_tag('/group_study_plan_search') do %>
+  <b>姓名：</b><%= select_tag "user_id", options_from_collection_for_select(@users, "id", "username", params[:user_id]), :prompt => "全 部", onchange: "submit()" %>
+  <b>科组：</b><%= select_tag "group_id", options_from_collection_for_select(@groups, "id", "name", params[:group_id]), :prompt => "全 部", onchange: "submit()" %>
+  <b>学期：</b><%= select_tag "term_id", options_from_collection_for_select(@terms, "id", "name", params[:term_id]), onchange: "submit()" %>
+<% end %>
+
+<span class="label label-info" style="font-size: 14px;">记录总数: <%= @group_study_plans.size %></span>
+
+<table class="table table-striped">
+  <thead>
+  	<tr>
+      <th style="width: 52%;">题 目</th>
+      <th style="width: 8%;">作 者</th>
+      <th style="width: 8%;">科 组</th>
+      <th style="width: 15%;">学 期</th>
+    </tr>
+	</thead>
+	<tbody>
+<% @group_study_plans.each do |group_study_plan| %>
+  <tr>
+    <td><%= link_to group_study_plan.title, group_study_plan_path(group_study_plan), target: '_blank' %></td>
+	  <td class="center"><%= group_study_plan.user.username %></td>
+    <td class="center"><%= group_study_plan.group.name %></td>
+	  <td class="center"><%= group_study_plan.term.name %></td>
+  </tr>
+<% end %>
+	</tbody>
+</table>

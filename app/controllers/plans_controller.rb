@@ -25,15 +25,20 @@ class PlansController < ApplicationController
   def show
     @plan = Plan.find(params[:id])
 
-    if logged_in?
-      ids = @plan.user.plans.pluck(:id)
-    else
-      ids = Plan.pluck(:id)
-    end
+    @next = Plan.unscoped.where('id > ?', params[:id]).first
+    @prev = Plan.unscoped.where('id < ?', params[:id]).last
 
-    i = ids.index(params[:id].to_i)
-    @next_plan = ids.first == params[:id].to_i ? nil : Plan.find(ids[i-1])
-    @prev_plan = ids.last == params[:id].to_i ? nil : Plan.find(ids[i+1])
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @plan }
+    end
+  end
+
+  def show_plans_personal
+    @plan = Plan.find(params[:id])
+
+    @next = Plan.unscoped.where(:user_id => current_user.id).where('id > ?', params[:id]).first
+    @prev = Plan.unscoped.where(:user_id => current_user.id).where('id < ?', params[:id]).last
 
     respond_to do |format|
       format.html # show.html.erb

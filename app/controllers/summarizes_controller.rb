@@ -25,15 +25,20 @@ class SummarizesController < ApplicationController
   def show
     @summarize = Summarize.find(params[:id])
 
-    if logged_in?
-      ids = @summarize.user.summarizes.pluck(:id)
-    else
-      ids = Summarize.pluck(:id)
-    end
+    @next = Summarize.unscoped.where('id > ?', params[:id]).first
+    @prev = Summarize.unscoped.where('id < ?', params[:id]).last
 
-    i = ids.index(params[:id].to_i)
-    @next_summarize = ids.first == params[:id].to_i ? nil : Summarize.find(ids[i-1])
-    @prev_summarize = ids.last == params[:id].to_i ? nil : Summarize.find(ids[i+1])
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @summarize }
+    end
+  end
+
+  def show_summarizes_personal
+    @summarize = Summarize.find(params[:id])
+
+    @next = Summarize.unscoped.where(:user_id => current_user.id).where('id > ?', params[:id]).first
+    @prev = Summarize.unscoped.where(:user_id => current_user.id).where('id < ?', params[:id]).last
 
     respond_to do |format|
       format.html # show.html.erb

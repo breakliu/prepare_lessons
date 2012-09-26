@@ -7,6 +7,9 @@ zh-CN:
       term: "学期"
       plan: "教学计划"
       summarize: "教学总结"
+      group_research_work_plan: "科组教研工作计划"
+      group_study_plan: "科组学习计划"
+      group: "科 组"
     attributes:
       lesson:
         title: "备课主题"
@@ -47,6 +50,18 @@ zh-CN:
         course: "科 目"
         term: "学 期"
         content: "内 容"
+      group_research_work_plan:
+        title: "标 题"
+        term: "学 期"
+        group: "科 组"
+        content: "内 容"
+      group_study_plan:
+        title: "标 题"
+        term: "学 期"
+        group: "科 组"
+        content: "内 容"
+      group:
+        name: "科组名称"
   date:
     abbr_day_names:
     - 日

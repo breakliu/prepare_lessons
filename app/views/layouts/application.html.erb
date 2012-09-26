@@ -7,10 +7,10 @@
   <title>西溪小学备课系统</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
 	<%= javascript_include_tag "application" %>
-	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-  <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   <%#= include_kindeditor_if_needed %>
   <%= csrf_meta_tags %>
 	<style type="text/css" media="screen">
@@ -29,8 +29,18 @@
 		.footer p { color: #555555; margin-bottom: 0; }
 		.footer { border-top: 1px solid #E5E5E5;margin-top: 45px;padding: 35px 0 36px;}
 		.size14px { font-size: 14px; }
-		.navbar .brand {color: #fff;}
-		.navbar .nav > li > a {color: #fff;}
+		.navbar .brand {color: #FFF; text-shadow: none;}
+		.navbar .nav > li > a {color: #FFF; text-shadow: none;}
+		.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
+		    background-color: #000;
+		    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.125) inset;
+		    color: #FFF;
+		    text-decoration: none;
+		}
+    .navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+      background-color: #3f92d2;
+      color: #000;
+    }
 		.dropdown-menu a {color: #000;}
 	</style>
 </head>
@@ -53,49 +63,61 @@
 	        <!-- .nav, .navbar-search, .navbar-form, etc -->
 					<ul class="nav">
 					  <li class="homepage size14px"><%= link_to '<i class="icon-home icon-white"></i> 首页'.html_safe, root_path %></li>
-						<li class="chinese size14px"><%= link_to '<i class="icon-book icon-white"></i> '.html_safe + Lesson::COURSES[0], course_path(0) %></li>
-						<li class="math size14px"><%= link_to '<i class="icon-book icon-white"></i> '.html_safe + Lesson::COURSES[1], course_path(1) %></li>
-						<li class="english size14px"><%= link_to '<i class="icon-book icon-white"></i> '.html_safe + Lesson::COURSES[2], course_path(2) %></li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle size14px" data-toggle="dropdown"><i class="icon-th-list icon-white"></i> 综 合<b class="caret"></b></a>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle size14px" data-toggle="dropdown"><i class="icon-th icon-white"></i> 科 目<b class="caret"></b></a>
+              <ul class="dropdown-menu size14px">
+                <li class="chinese size14px"><%= link_to '<i class="icon-book"></i> '.html_safe + Lesson::COURSES[0], course_path(0) %></li>
+                <li class="math size14px"><%= link_to '<i class="icon-book"></i> '.html_safe + Lesson::COURSES[1], course_path(1) %></li>
+                <li class="english size14px"><%= link_to '<i class="icon-book"></i> '.html_safe + Lesson::COURSES[2], course_path(2) %></li>
+                <li class="dropdown-submenu">
+                  <a tabindex="-1" href="#"><i class="icon-book"></i> 综合</a>
+                  <ul class="dropdown-menu size14px">
+                  <% Lesson::COURSES[3..-1].each_with_index do |i,index| %>
+                  <li><%= link_to '<i class="icon-book"></i>'.html_safe + i, course_path(index+3) %></li>
+                  <% end %>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+							<a href="#" class="dropdown-toggle size14px" data-toggle="dropdown"><i class="icon-tasks icon-white"></i> 计 划<b class="caret"></b></a>
 							<ul class="dropdown-menu size14px">
-							<% Lesson::COURSES[3..-1].each_with_index do |i,index| %>
-						    	<li><%= link_to '<i class="icon-book"></i>'.html_safe + i, course_path(index+3) %></li>
-							<% end %>
-						    </ul>
+						    <li><%= link_to '<i class="icon-book"></i>教学计划'.html_safe, plan_list_path %></li>
+                <li class="divider"></li>
+                <li><%= link_to '<i class="icon-book"></i>科组教研工作计划'.html_safe, group_research_work_plan_list_path %></li>
+                <li><%= link_to '<i class="icon-book"></i>科组学习计划'.html_safe, group_study_plan_list_path %></li>
+						  </ul>
 						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle size14px" data-toggle="dropdown"><i class="icon-th-list icon-white"></i> 计划与总结<b class="caret"></b></a>
-							<ul class="dropdown-menu size14px">
-						    	<li><%= link_to '<i class="icon-book"></i>教学计划'.html_safe, plan_list_path %></li>
-						    	<li><%= link_to '<i class="icon-book"></i>教学总结'.html_safe, summarize_list_path %></li>
-						    </ul>
-						</li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle size14px" data-toggle="dropdown"><i class="icon-th-list icon-white"></i> 总 结<b class="caret"></b></a>
+              <ul class="dropdown-menu size14px">
+                  <li><%= link_to '<i class="icon-book"></i>教学总结'.html_safe, summarize_list_path %></li>
+                </ul>
+            </li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle size14px" data-toggle="dropdown"><i class="icon-search icon-white"></i> 查 找<b class="caret"></b></a>
 							<ul class="dropdown-menu size14px">
 						    	<li><%= link_to '<i class="icon-book"></i>备课'.html_safe, advanced_search_path %></li>
+                  <li class="divider"></li>
 						    	<li><%= link_to '<i class="icon-book"></i>教学计划'.html_safe, plan_search_path %></li>
+                  <li><%= link_to '<i class="icon-book"></i>科组教研工作计划'.html_safe, group_research_work_plan_search_path %></li>
+                  <li><%= link_to '<i class="icon-book"></i>科组学习计划'.html_safe, group_study_plan_search_path %></li>
+                  <li class="divider"></li>
 						    	<li><%= link_to '<i class="icon-book"></i>教学总结'.html_safe, summarize_search_path %></li>
-						    </ul>
+						  </ul>
 						</li>
-					  <!--li class="divider-vertical"></li-->
 					</ul>
-					<!--form class="navbar-search pull-left" accept-charset="UTF-8" action="/search_lesson" method="post">
-					  <i class="icon-search icon-white"></i><input type="text" class="search-query" placeholder="搜索" name="search_str">
-					</form-->
-					
-					<%#ul class="nav">
-					  <li class="advanced_search size14px"><%= link_to '<i class="icon-search icon-white"></i> 查找备课'.html_safe, advanced_search_path %><!--/li>
-					</ul-->
-
 					<ul class="nav pull-right">
 					<% if logged_in? %>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle size14px" data-toggle="dropdown"><i class="icon-user icon-white"></i> <%=current_user.username%><b class="caret"></b></a>
 							<ul class="dropdown-menu size14px">
 						    	<li><%= link_to '<i class="icon-file"></i> 备课'.html_safe, myhome_path %></li>
+                  <li class="divider"></li>
 						    	<li><%= link_to '<i class="icon-pencil"></i> 教学计划'.html_safe, plans_path %></li>
+                  <li><%= link_to '<i class="icon-pencil"></i> 科组教研工作计划'.html_safe, group_research_work_plans_path %></li>
+                  <li><%= link_to '<i class="icon-pencil"></i> 科组学习计划'.html_safe, group_study_plans_path %></li>
+                  <li class="divider"></li>
 						    	<li><%= link_to '<i class="icon-inbox"></i> 教学总结'.html_safe, summarizes_path %></li>
 						    </ul>
 						</li>
@@ -103,7 +125,7 @@
 					<% if logged_in? %>
 						<li class="size14px"><%= link_to '<i class="icon-off icon-white"></i> '.html_safe + "注 销", logout_path %></li>
 					<% else %>
-						<li class="login size14px"><%= link_to '<i class="icon-flag icon-white"></i> '.html_safe + "登 陆", login_path %></li>
+						<li class="login size14px"><%= link_to '<i class="icon-user icon-white"></i> '.html_safe + "登 陆", login_path %></li>
 						<li class="signup size14px"><%= link_to '<i class="icon-plus icon-white"></i> '.html_safe + "注 册", signup_path %></li>
 					<% end %>
 					</ul>

@@ -1,11 +1,7 @@
-<div class="row">
-  <div class="span12">
-    <%= link_to %(<i class="icon-arrow-left"></i>上一篇: #{@prev_summarize.title}).html_safe, summarize_path(@prev_summarize), :class => 'pull-left' if @prev_summarize %>
-    <%= link_to %(下一篇: #{@next_summarize.title}<i class="icon-arrow-right"></i>).html_safe, summarize_path(@next_summarize), :class => 'pull-right' if @next_summarize %>
-  </div>
-</div>
-
-<br/>
+<ul class="pager">
+  <li class="previous"><%= link_to %(&larr; 上一篇: #{@prev.title}).html_safe, summarize_path(@prev) if @prev %></li>
+  <li class="next"><%= link_to %(下一篇: #{@next.title} &rarr;).html_safe, summarize_path(@next) if @next %></li>
+</ul>
 
 <p>
   <b>标题:</b>

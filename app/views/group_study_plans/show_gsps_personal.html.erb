@@ -1,0 +1,33 @@
+<ul class="pager">
+  <li class="previous"><%= link_to %(&larr; 上一篇: #{@prev.title}).html_safe, show_gsps_personal_path(@prev) if @prev %></li>
+  <li class="next"><%= link_to %(下一篇: #{@next.title} &rarr;).html_safe, show_gsps_personal_path(@next) if @next %></li>
+</ul>
+
+<p>
+  <b>题目:</b>
+  <%= @group_study_plan.title %>
+</p>
+
+<p>
+  <b>作者:</b>
+  <%= @group_study_plan.user.username %>
+</p>
+
+<p>
+  <b>科组:</b>
+  <%= @group_study_plan.group.name %>
+</p>
+
+<p>
+  <b>学期:</b>
+  <%= @group_study_plan.term.name %>
+</p>
+
+<p>
+  <b>内容:</b><br/>
+  <%= @group_study_plan.content.html_safe %>
+</p>
+
+
+<%#= link_to 'Edit', edit_group_study_plan_path(@group_study_plan) %>
+<%#= link_to 'Back', group_study_plans_path %>

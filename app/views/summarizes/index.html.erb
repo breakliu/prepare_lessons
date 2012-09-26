@@ -1,6 +1,3 @@
-<script type="text/javascript" charset="utf-8">
-$('.mysummarize').addClass('active');
-</script>
 <style type="text/css">
 table.table thead tr th{
   text-align: center;
@@ -25,7 +22,7 @@ table.table tbody tr td.center{
     <tbody>
 <% @summarizes.each do |summarize| %>
   <tr>
-    <td><%= link_to summarize.title, summarize_path(summarize) %></td>
+    <td><%= link_to summarize.title, show_summarizes_personal_path(summarize) %></td>
     <td class="center"><%= summarize.user.username if summarize.user %></td>
     <!--td class="center"><%= summarize.course %></td-->
     <td class="center"><%= summarize.term.name %></td>

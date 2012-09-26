@@ -1,10 +1,30 @@
 PrepareLessons::Application.routes.draw do
   
+  resources :groups
+
+  resources :group_study_plans
+  get '/show_gsps_personal/:id/' => "group_study_plans#show_gsps_personal", :as => 'show_gsps_personal'
+  get '/group_study_plan_list/' => "group_study_plans#group_study_plan_list", :as => 'group_study_plan_list'
+  get '/group_study_plan_search/' => "group_study_plans#group_study_plan_search", :as => "group_study_plan_search"
+  post '/group_study_plan_search/' => "group_study_plans#group_study_plan_search", :as => "group_study_plan_search"
+
+  resources :group_research_work_plans
+  get '/show_grwps_personal/:id/' => "group_research_work_plans#show_grwps_personal", :as => 'show_grwps_personal'
+  get '/group_research_work_plan_list/' => "group_research_work_plans#group_research_work_plan_list", :as => 'group_research_work_plan_list'
+  get '/group_research_work_plan_search/' => "group_research_work_plans#group_research_work_plan_search", :as => "group_research_work_plan_search"
+  post '/group_research_work_plan_search/' => "group_research_work_plans#group_research_work_plan_search", :as => "group_research_work_plan_search"
+
   resources :summarizes
+  get '/show_summarizes_personal/:id/' => "summarizes#show_summarizes_personal", :as => 'show_summarizes_personal'
   get '/summarize_list/' => "summarizes#summarize_list", :as => 'summarize_list'
+  get '/summarize_search/' => "summarizes#summarize_search", :as => "summarize_search"
+  post '/summarize_search/' => "summarizes#summarize_search", :as => "summarize_search"
 
   resources :plans
+  get '/show_plans_personal/:id/' => "plans#show_plans_personal", :as => 'show_plans_personal'
   get '/plan_list/' => "plans#plan_list", :as => 'plan_list'
+  get '/plan_search/' => "plans#plan_search", :as => "plan_search"
+  post '/plan_search/' => "plans#plan_search", :as => "plan_search"
 
   resources :terms
 
@@ -31,13 +51,6 @@ PrepareLessons::Application.routes.draw do
 
   get '/advanced_search/' => "lessons#advanced_search", :as => "advanced_search"
   post '/advanced_search/' => "lessons#advanced_search", :as => "advanced_search"
-
-  get '/plan_search/' => "plans#plan_search", :as => "plan_search"
-  post '/plan_search/' => "plans#plan_search", :as => "plan_search"
-
-    get '/summarize_search/' => "summarizes#summarize_search", :as => "summarize_search"
-  post '/summarize_search/' => "summarizes#summarize_search", :as => "summarize_search"
-  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

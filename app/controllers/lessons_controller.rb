@@ -136,18 +136,24 @@ class LessonsController < ApplicationController
     @lesson = Lesson.find(params[:id])
 
     if params[:flag].blank?
-      ids = @lesson.user.lessons.pluck(:id)                                           # 用户自己的备课
+      #ids = @lesson.user.lessons.pluck(:id)                                           # 用户自己的备课
+      @next = Lesson.unscoped.where(:user_id => current_user.id).where('id > ?', params[:id]).first
+      @prev = Lesson.unscoped.where(:user_id => current_user.id).where('id < ?', params[:id]).last
     else
       if -1 == params[:flag].to_i
-        ids = Lesson.where(:course => Lesson::COURSES[3..-1]).pluck(:id)              # 综合科所有科目
+        #ids = Lesson.where(:course => Lesson::COURSES[3..-1]).pluck(:id)              # 综合科所有科目
+        @next = Lesson.unscoped.where('id > ?', params[:id]).where(:course => Lesson::COURSES[3..-1]).first
+        @prev = Lesson.unscoped.where('id < ?', params[:id]).where(:course => Lesson::COURSES[3..-1]).last
       else
-        ids = Lesson.where(:course => Lesson::COURSES[params[:flag].to_i]).pluck(:id) # 指定科目
+        #ids = Lesson.where(:course => Lesson::COURSES[params[:flag].to_i]).pluck(:id) # 指定科目
+        @next = Lesson.unscoped.where('id > ?', params[:id]).where(:course => Lesson::COURSES[params[:flag].to_i]).first
+        @prev = Lesson.unscoped.where('id < ?', params[:id]).where(:course => Lesson::COURSES[params[:flag].to_i]).last
       end
     end
     
-    i = ids.index(params[:id].to_i)
-    @next_lesson = ids.first == params[:id].to_i ? nil : Lesson.find(ids[i-1])
-    @prev_lesson = ids.last == params[:id].to_i ? nil : Lesson.find(ids[i+1])
+    #i = ids.index(params[:id].to_i)
+    #@next_lesson = ids.first == params[:id].to_i ? nil : Lesson.find(ids[i-1])
+    #@prev_lesson = ids.last == params[:id].to_i ? nil : Lesson.find(ids[i+1])
     
     # 兼容旧格式, WTF!!!
     tpl = 'show_lesson.html.erb'
