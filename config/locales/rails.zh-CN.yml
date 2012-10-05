@@ -35,6 +35,7 @@ zh-CN:
         evaluate_blackboard: "评价及板书设计"
         summary_homework: "小结及作业"
         thinking: "教学反思"
+        content: "课时内容"
       user:
         username: "用户名"
         password_confirmation: "再次输入密码"

@@ -6,15 +6,18 @@ gem 'rails', '3.2.8'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-gem 'thin'
+#gem 'thin'
 gem 'cancan'
 gem 'sorcery'
 #gem 'nested_form'#, :git => 'git://github.com/ryanb/nested_form.git'
+gem "nested_form"
 gem 'simple_form'
 gem 'rails_kindeditor'
 gem "carrierwave"
 gem 'will_paginate'
 gem 'therubyracer'
+gem 'wkhtmltopdf-binary'
+gem 'pdfkit'
 
 
 

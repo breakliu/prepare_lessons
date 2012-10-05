@@ -156,9 +156,11 @@ class LessonsController < ApplicationController
     #@prev_lesson = ids.last == params[:id].to_i ? nil : Lesson.find(ids[i+1])
     
     # 兼容旧格式, WTF!!!
-    tpl = 'show_lesson.html.erb'
-    if @lesson.created_at < Time.new('2012','8','29')
+    tpl = 'show_lesson_new.html.erb'
+    if @lesson.created_at < Time.new('2012','9','1')
       tpl = 'show_lesson_old.html.erb'
+    elsif @lesson.created_at < Time.new('2012','10','4')
+      tpl = 'show_lesson.html.erb'
     end
 
     respond_to do |format|

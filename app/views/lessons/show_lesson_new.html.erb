@@ -1,0 +1,82 @@
+<style type="text/css" media="screen">
+.table-bordered th {
+	border-color: black;
+	text-align: center;
+	vertical-align: middle;
+}
+.table-bordered {
+	border-color: black;
+}
+.table-bordered td {
+	border-color: black;
+}
+.unstyled li {
+	text-align: center; 
+	font-size: 14px;
+	height: 20px;
+}
+</style>
+<ul class="pager">
+  <li class="previous"><%= link_to %(&larr; 上一篇: #{@prev.title}).html_safe, show_lesson_path(@prev, course_type(@prev)) if @prev %></li>
+  <li class="next"><%= link_to %(下一篇: #{@next.title} &rarr;).html_safe, show_lesson_path(@next, course_type(@next)) if @next %></li>
+</ul>
+<ul class="unstyled">
+	<li><b><%= @lesson.title %></b></li>
+	<li>
+		<span><%= @lesson.grade %></span>
+		<span><%= @lesson.course %></span>
+		<span><%= @lesson.volume %></span>
+		<span><%= @lesson.unit %></span>
+	</li>
+	<li>备课老师 <%= @lesson.user.username %></li>
+</ul>
+
+<table class="table table-bordered">
+	<tr>
+		<th>课时</th>
+		<td colspan="2"><%= @lesson.class_hour %></td>
+	</tr>
+	<tr>
+		<th rowspan="3" width="4%">教学目标</th>
+		<th width="10%">知识目标</th>
+		<td width="86%"><%= @lesson.goal_knowledge.html_safe %></td>
+	</tr>
+	<tr>
+		<th>能力目标</th>
+		<td><%= @lesson.goal_ability.html_safe %></td>
+	</tr>
+	<tr>
+		<th>情感目标</th>
+		<td><%= @lesson.goal_emotion.html_safe %></td>
+	</tr>
+	<tr>
+		<th>单元训练重点</th>
+		<td colspan="2"><%= @lesson.unit_emphasis.html_safe %></td>
+	</tr>
+	<tr>
+		<th>教学重点</th>
+		<td colspan="2"><%= @lesson.teaching_emphasis.html_safe %></td>
+	</tr>
+	<tr>
+		<th>教学难点</th>
+		<td colspan="2"><%= @lesson.teaching_difficulty.html_safe %></td>
+	</tr>
+	<tr>
+		<th>教学方法</th>
+		<td colspan="2"><%= @lesson.teaching_method.html_safe %></td>
+	</tr>
+	<tr>
+		<th>教学准备</th>
+		<td colspan="2"><%= @lesson.teaching_ready.html_safe %></td>
+	</tr>
+</table>
+
+<% @lesson.lesson_hours.each_with_index do |lh, index| %>
+<%= lh.content.html_safe %></td>
+<br />
+<% end %>
+
+<script language="Javascript">
+document.oncontextmenu=new Function("event.returnValue=false");
+document.onselectstart=new Function("event.returnValue=false");
+</script>
