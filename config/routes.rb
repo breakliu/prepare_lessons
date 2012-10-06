@@ -43,7 +43,7 @@ PrepareLessons::Application.routes.draw do
 
   resources :lessons
   
-  get '/show_lesson/:id/(:flag)' => "lessons#show_lesson", :as => 'show_lesson'
+  get '/show_lesson/:id/(:flag)/(:is_pdf)' => "lessons#show_lesson", :as => 'show_lesson'
   get '/myhome/' => "lessons#myhome", :as => 'myhome'
 
   get '/course/:course_id' => "lessons#course", :as  => 'course'

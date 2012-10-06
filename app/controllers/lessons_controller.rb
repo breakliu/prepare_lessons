@@ -150,11 +150,7 @@ class LessonsController < ApplicationController
         @prev = Lesson.unscoped.where('id < ?', params[:id]).where(:course => Lesson::COURSES[params[:flag].to_i]).last
       end
     end
-    
-    #i = ids.index(params[:id].to_i)
-    #@next_lesson = ids.first == params[:id].to_i ? nil : Lesson.find(ids[i-1])
-    #@prev_lesson = ids.last == params[:id].to_i ? nil : Lesson.find(ids[i+1])
-    
+
     # 兼容旧格式, WTF!!!
     tpl = 'show_lesson_new.html.erb'
     if @lesson.created_at < Time.new('2012','9','1')
@@ -164,10 +160,23 @@ class LessonsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { render tpl }# show.html.erb
+      if params[:is_pdf] == 1
+        format.html { render tpl, :layout => false }# show.html.erb
+      else
+        format.html { render tpl }# show.html.erb
+      end
+      
       format.json { render json: @lesson }
-      format.pdf { render :text => PDFKit.new( show_lesson_url(:id=>params[:id], :flag=>params[:flag]) ).to_pdf, :layout=>false }
+      format.pdf do
+        send_data PDFKit.new( show_lesson_url(:id=>params[:id], :flag=>params[:flag], :is_pdf => 1), :page_size => 'A4' ).to_pdf, 
+                  :filename => "#{@lesson.title}_#{@lesson.user.username}.pdf", 
+                  :type => 'application/pdf', 
+                  :disposition => 'attachment'
+      end
     end
+  end
+
+  def show_lesson_pdf
   end
 
   # GET /lessons/new

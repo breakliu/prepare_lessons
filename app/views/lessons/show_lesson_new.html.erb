@@ -29,6 +29,7 @@
 		<span><%= @lesson.unit %></span>
 	</li>
 	<li>备课老师 <%= @lesson.user.username %></li>
+	<div class="pull-right"><p><%= link_to '导出', show_lesson_path(@lesson, params[:flag], :format=>'pdf'), :class=>'btn btn-info' if params[:is_pdf].blank? %></p></div>
 </ul>
 
 <table class="table table-bordered">
