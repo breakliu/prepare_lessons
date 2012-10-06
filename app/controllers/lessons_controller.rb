@@ -164,8 +164,9 @@ class LessonsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { render tpl}# show.html.erb
+      format.html { render tpl }# show.html.erb
       format.json { render json: @lesson }
+      format.pdf { render :text => PDFKit.new( 'http://imlcl.com/' ).to_pdf }
     end
   end
 
