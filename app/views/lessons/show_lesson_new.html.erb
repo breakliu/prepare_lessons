@@ -16,10 +16,12 @@
 	height: 20px;
 }
 </style>
+<% if params[:is_pdf].blank? %>
 <ul class="pager">
   <li class="previous"><%= link_to %(&larr; 上一篇: #{@prev.title}).html_safe, show_lesson_path(@prev, course_type(@prev)) if @prev %></li>
   <li class="next"><%= link_to %(下一篇: #{@next.title} &rarr;).html_safe, show_lesson_path(@next, course_type(@next)) if @next %></li>
 </ul>
+<% end %>
 <ul class="unstyled">
 	<li><b><%= @lesson.title %></b></li>
 	<li>
@@ -29,7 +31,7 @@
 		<span><%= @lesson.unit %></span>
 	</li>
 	<li>备课老师 <%= @lesson.user.username %></li>
-	<div class="pull-right"><p><%= link_to '导出', show_lesson_path(@lesson, params[:flag], :format=>'pdf'), :class=>'btn btn-info' if params[:is_pdf].blank? %></p></div>
+	<div class="pull-left"><p><%= link_to '导出文档', show_lesson_path(@lesson, params[:flag], :format=>'pdf'), :class=>'btn btn-primary' if params[:is_pdf].blank? %></p></div>
 </ul>
 
 <table class="table table-bordered">

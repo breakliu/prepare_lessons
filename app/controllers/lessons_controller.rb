@@ -160,8 +160,8 @@ class LessonsController < ApplicationController
     end
 
     respond_to do |format|
-      if params[:is_pdf] == 1
-        format.html { render tpl, :layout => false }# show.html.erb
+      if not params[:is_pdf].blank?
+        format.html { render tpl, :layout => 'lesson_pdf' }# show.html.erb
       else
         format.html { render tpl }# show.html.erb
       end
