@@ -9,6 +9,7 @@ select { border: 1px solid #BBBBBB; width: auto; color: #000;}
   <b>科目：</b><%= select_tag "course", options_for_select(Lesson::COURSES, params[:course]), :prompt => "全 部", onchange: "submit()" %>
   <b>年级：</b><%= select_tag "grade", options_for_select(Lesson::GRADES, params[:grade]), :prompt => "全 部", onchange: "submit()" %>
   <b>学期：</b><%= select_tag "term_id", options_from_collection_for_select(@terms, "id", "name", params[:term_id]), onchange: "submit()" %>
+  <b>类别：</b><%= select_tag "is_report", options_for_select([["全部(包括汇报课)", ""],["只显示汇报课","t"]], params[:is_report]), onchange: "submit()" %>
 <% end %>
 
 <span class="label label-info" style="font-size: 14px;">记录总数: <%= @lessons.size %></span>

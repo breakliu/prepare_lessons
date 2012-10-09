@@ -2,7 +2,7 @@
 $(function() {
   //限制最多10个课时--------------------------------------------
   var fieldsCount,
-      maxFieldsCount = 9,
+      maxFieldsCount = 10,
       $addLink = $('a.add_nested_fields');
   
   function toggleAddLink() {
@@ -29,11 +29,13 @@ $(function() {
     var field = event.field;
     var editor = KindEditor.create('form textarea[id="'+field.find('textarea')[0].id+'"]', {
       allowFileManager : true,
-      width : '100%'
+      width : '100%',
+      height : '600px',
+      pasteType : 1
     });
     editor.html('<table style="width:100%;border:1px solid black;font-size:16px;" border="1"> \
   <tr>\
-    <th style="border: 1px solid black; background-color: #ddd;"  colspan="4" >第 课时</th>\
+    <th style="border: 1px solid black; background-color: #ddd;"  colspan="4" >第'+fieldsCount+'课时</th>\
   </tr>\
   <tr>\
     <th style="border: 1px solid black;"  rowspan="2" width="4%">教学过程</th>\
@@ -42,7 +44,7 @@ $(function() {
     <th style="border: 1px solid black;"  width="23%">设计意图</th>\
   </tr>\
   <tr>\
-    <td style="border: 1px solid black;" valign="top" height="100px"></td>\
+    <td style="border: 1px solid black;" valign="top" height="200px"></td>\
     <td style="border: 1px solid black;" valign="top"></td>\
     <td style="border: 1px solid black;" valign="top"></td>\
   </tr>\
@@ -67,7 +69,9 @@ $(function() {
     if ( this.id.indexOf('lesson_hours') != -1 ) {
       KindEditor.create('form textarea[id="'+this.id+'"]', {
         allowFileManager : true,
-        width : '100%'
+        width : '100%',
+        height : '600px',
+        pasteType : 1
       });
     }
   });
@@ -84,14 +88,15 @@ $(function() {
 		<%= f.input :volume, :collection => Lesson::VOLUMES, include_blank: false %>
 		<%= f.input :unit, :collection => Lesson::UNITS, include_blank: false %>
 		<%= f.association :term, include_blank: false %>
-    <%= f.input :goal_knowledge, as: :kindeditor, input_html: { height: '150' } %>
-    <%= f.input :goal_ability, as: :kindeditor, input_html: { height: '150' } %>
-    <%= f.input :goal_emotion, as: :kindeditor, input_html: { height: '150' } %>
-    <%= f.input :unit_emphasis, as: :kindeditor, input_html: { height: '150' } %>
-    <%= f.input :teaching_emphasis, as: :kindeditor, input_html: { height: '150' } %>
-    <%= f.input :teaching_difficulty, as: :kindeditor, input_html: { height: '150' } %>
-    <%= f.input :teaching_method, as: :kindeditor, input_html: { height: '150' } %>
-    <%= f.input :teaching_ready, as: :kindeditor, input_html: { height: '150' } %>
+    <%= f.input :is_report %>
+    <%= f.input :goal_knowledge, as: :kindeditor, input_html: { height: '200px' } %>
+    <%= f.input :goal_ability, as: :kindeditor, input_html: { height: '200px' } %>
+    <%= f.input :goal_emotion, as: :kindeditor, input_html: { height: '200px' } %>
+    <%= f.input :unit_emphasis, as: :kindeditor, input_html: { height: '150px' } %>
+    <%= f.input :teaching_emphasis, as: :kindeditor, input_html: { height: '150px' } %>
+    <%= f.input :teaching_difficulty, as: :kindeditor, input_html: { height: '150px' } %>
+    <%= f.input :teaching_method, as: :kindeditor, input_html: { height: '200px' } %>
+    <%= f.input :teaching_ready, as: :kindeditor, input_html: { height: '150px' } %>
     <div style="border-bottom: 1px solid #DDD;margin-bottom: 15px;"></div>
 		<%= f.fields_for :lesson_hours do |lesson_hour| %>
 		  <%= lesson_hour.input :content %>

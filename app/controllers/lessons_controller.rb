@@ -36,6 +36,7 @@ class LessonsController < ApplicationController
     str[:course] = params[:course] if not params[:course].blank?
     str[:grade] = params[:grade] if not params[:grade].blank?
     str[:user_id] = params[:user_id] if not params[:user_id].blank?
+    str[:is_report] = params[:is_report] if not params[:is_report].blank?
     if not params[:term_id].blank?
       str[:term_id] = params[:term_id]
     else
@@ -169,14 +170,11 @@ class LessonsController < ApplicationController
       format.json { render json: @lesson }
       format.pdf do
         send_data PDFKit.new( show_lesson_url(:id=>params[:id], :flag=>params[:flag], :is_pdf => 1), :page_size => 'A4' ).to_pdf, 
-                  :filename => "#{@lesson.title}_#{@lesson.user.username}.pdf", 
+                  :filename => "beike.pdf", 
                   :type => 'application/pdf', 
                   :disposition => 'attachment'
       end
     end
-  end
-
-  def show_lesson_pdf
   end
 
   # GET /lessons/new

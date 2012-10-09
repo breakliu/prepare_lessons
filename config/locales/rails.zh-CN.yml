@@ -28,6 +28,7 @@ zh-CN:
         teaching_ready: "教学准备"
         term: "学 期"
         content: "内 容"
+        is_report: "汇报课"
       lesson_hour:
         process_teacher: "教师活动"
         process_stu: "学生活动"
