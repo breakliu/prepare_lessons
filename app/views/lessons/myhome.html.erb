@@ -34,7 +34,7 @@ table.table tbody tr td.center{
     <td class="center"><%= lesson.volume %></td>
     <td class="center"><%= lesson.unit %></td>
 		<td class="center"><%= lesson.term.name %></td>
-    <td class="center"><%= link_to '编 辑', edit_lesson_path(lesson), :class => 'btn btn-primary btn-mini' if lesson.created_at >= Time.new('2012','10','4') %>  <%= link_to '删 除', lesson, confirm: '您确定要删除吗?', method: :delete, :class => 'btn btn-danger btn-mini' %></td>
+    <td class="center"><%= link_to '编 辑', edit_lesson_path(lesson), :class => 'btn btn-primary btn-mini' if lesson.created_at >= Time.new('2012','9','1') %>  <%= link_to '删 除', lesson, confirm: '您确定要删除吗?', method: :delete, :class => 'btn btn-danger btn-mini' %></td>
   </tr>
 <% end %>
 	</tbody>

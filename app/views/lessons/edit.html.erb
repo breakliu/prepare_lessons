@@ -1,3 +1,6 @@
 <h2>编辑备课</h2>
-
+<% if @lesson.created_at >= Time.new('2012','9','1') and @lesson.created_at < Time.new('2012','10','4') %>
+<%= render 'form2' %>
+<% else %>
 <%= render 'form' %>
+<% end %>

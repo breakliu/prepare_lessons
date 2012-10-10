@@ -1,0 +1,18 @@
+<%= simple_nested_form_for(@lesson, :html => { :class => 'form-horizontal' } ) do |f| %>
+  <div class="form-inputs">
+		<%= f.input :title %>
+		<%= f.input :class_hour, :collection => [1,2,3,4,5,6,7,8,9,10,11,12], include_blank: false %>
+		<%= f.input :course, :collection => Lesson::COURSES, include_blank: false %>
+		<%= f.input :grade, :collection => Lesson::GRADES, include_blank: false %>
+		<%= f.input :volume, :collection => Lesson::VOLUMES, include_blank: false %>
+		<%= f.input :unit, :collection => Lesson::UNITS, include_blank: false %>
+		<%= f.association :term, include_blank: false %>
+		<%= f.input :content, as: :kindeditor, input_html: { height: '700' } %>
+		
+	</div>
+	<div class="form-actions">
+		<%= f.button :submit, :class => "btn btn-primary" %>
+		<%= link_to '取 消', myhome_path, :class => "btn" if logged_in? %>
+		<%= link_to '取 消', lessons_path, :class => "btn" if not logged_in? %>
+	</div>
+<% end %>
