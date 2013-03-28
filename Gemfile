@@ -1,4 +1,4 @@
-source 'http://ruby.taobao.org'
+source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
 
@@ -15,7 +15,7 @@ gem 'simple_form'
 gem 'rails_kindeditor'
 gem "carrierwave"
 gem 'will_paginate'
-gem 'therubyracer'
+#gem 'therubyracer'
 gem 'wkhtmltopdf-binary'
 gem 'pdfkit'
 #gem 'wicked_pdf'
