@@ -1,6 +1,6 @@
-source 'https://rubygems.org'
+source 'http://ruby.taobao.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -15,7 +15,7 @@ gem 'simple_form'
 gem 'rails_kindeditor'
 gem "carrierwave"
 gem 'will_paginate'
-#gem 'therubyracer'
+gem 'therubyracer'
 gem 'wkhtmltopdf-binary'
 gem 'pdfkit'
 #gem 'wicked_pdf'
