@@ -29,6 +29,8 @@ $(function() {
     var field = event.field;
     var editor = KindEditor.create('form textarea[id="'+field.find('textarea')[0].id+'"]', {
       allowFileManager : true,
+      fileManagerJson: "/kindeditor/filemanager",
+      uploadJson: "/kindeditor/upload",
       width : '100%',
       height : '600px',
       pasteType : 1
